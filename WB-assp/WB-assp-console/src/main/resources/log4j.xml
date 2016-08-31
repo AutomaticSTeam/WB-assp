@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- Appenders  将日志信息打印到控制台  -->
+    <appender name="web" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p] [%d{yyyy-MM-dd HH\:mm\:ss}][%c]%m%n"/>
+        </layout>
+    </appender> 
+
+    <!-- 每天生成一个日志文件到指定目录下 -->
+    <appender name="dailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender"> 
+        <param name="Encoding" value="UTF-8" />  
+        <param name="File" value="${catalina.home}/logs/workorder.log" />   
+        <param name="Append" value="true" />     
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />     
+        <layout class="org.apache.log4j.PatternLayout">       
+            <param name="ConversionPattern" value="[%p] [%d{yyyy-MM-dd HH\:mm\:ss}][%c]%m%n" />
+        </layout> 
+    </appender>
+    
+	<category name="org.springframework">
+	  <priority value="INFO"/>
+	</category> 
+	
+   <!-- on server open -->
+   <!-- 
+   <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="dailyRollingFile"/>
+    </root> 
+    -->
+    
+    <!-- local dev open -->
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="dailyRollingFile"/>
+        <appender-ref ref="web"/>
+    </root> 
+    
+</log4j:configuration>

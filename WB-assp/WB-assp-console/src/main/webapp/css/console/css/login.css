@@ -1,0 +1,31 @@
+﻿@charset "utf-8";
+.bigBg1{background:url(../img/bg2.gif) repeat-y 0 0;}
+.logWrap{background:url(../img/bigBg1.jpg) no-repeat center -40px;width:100%;position:relative;}
+.header{text-align:center;padding-top:70px;padding-bottom:68px;}
+.login .userName,.login .password,.login .codeText,.login button,.login .warning,.login .error{background:url(../img/page.gif) no-repeat;}
+.login{width:320px;padding-left:50px;margin:0 auto;}
+.login .loginItem{width:320px;height:62px;position:relative;*zoom:1;}
+.login .loginItem:after{height:0;content:" ";clear:both;display:block;}
+.login .userName,.login .password,.login .codeText{padding-left:35px;float:left;height:32px;line-height:32px;border:0;font-size:14px;font-family:Arial;}
+.login .userName,.login .password{width:201px;}
+.login .loginItem .label{width:60px;line-height:32px;float:left;font-size:14px;text-align:right;}
+.login .userName{background-position:0 -121px;}
+.login .unHigh,.login .unHover{background-position:0 -153px;}
+.login .unError{background-position:0 -185px;}
+.login .password{float:left;background-position:0 -217px;}
+.login .psdHigh,.login .psdHover{background-position:0 -249px;}
+.login .psdError{background-position:0 -281px;}
+.login .codeText{background-position:0 -313px;width:74px;}
+.login .codeHigh,.login .codeHover{background-position:0 -345px;}
+.login .codeError{background-position:0 -377px;}
+.login .codeImg{float:left;padding:5px 5px 0 5px;}
+.login .image{border:1px solid black;float:left;}
+.login .changeCode{padding-top:7px;float:left;}
+.login .refreshCode,.login .refreshCode:hover{font-size:12px;color:#03c;text-decoration:underline;}
+.login .warning,.login .error{padding:0 0 0 22px;width:200px;height:16px;line-height:16px;position:absolute;left:60px;top:39px;}
+.login .warning{background-position:-384px -60px;}
+.login .error{background-position:-384px -89px;color:red;}
+.login .submitBtn{padding-left:60px;}
+.login button{background-position:-109px -313px;border:0;color:white;cursor:pointer;font-size:16px;font-weight:bold;width:115px;height:39px;}
+.footer{padding:140px 0 20px 50px;text-align:center;} 
+.footer p em{font-family:arial;font-size:12px;}

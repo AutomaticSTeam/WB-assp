@@ -1,0 +1,131 @@
+
+/* =Global
+--------------------*/
+body {
+	background:url(../images/bigBg.png) repeat-x #fff;width:100%;min-width:800px;max-width:1200px;margin:0 auto;}
+
+h1, h2, h3, h4, h5 {font-family: 微软雅黑;font-size:30px;color:#52a9ff;}
+
+a:link,
+a:visited,
+span.link-like {
+	color: #2976C2;
+	outline: none;
+	font-weight: bold;
+	text-decoration: underline; }
+	a:hover,
+	span.link-like:hover {
+		color: #FFFFFF;
+		background: #2976C2; }
+a:active { outline: none; }
+
+a#skip { display: none; }
+
+b.required {
+	color: #FF0000;
+	font-weight: normal; }
+
+.edit a,
+a.edit {
+	font-weight: bold;
+	color: #F90000; }
+	.edit a:hover,
+	a.edit:hover {
+		background: #F90000;
+		color: #FFFFFF; }
+sub, sup {
+	font-size: 10px;
+	font-weight: normal;
+	padding: 0 3px;
+	color: #999999; }
+.working-icon { display: block; }
+
+/* =Sitewrapper -> Content -> Fieldsets
+--------------------*/
+	/* =Sitewrapper -> Content
+	--------------------*/
+	#sitewrapper #content {
+		clear: both;
+		background: #FFFFFF;
+		z-index: 100;
+		position: relative;
+		border: 1px solid #A7A7A7; }
+		#sitewrapper #content #main {
+			clear: both;
+			background: #FFFFFF;
+			z-index: 100;
+			position: relative;
+			border: 8px solid #F3F3F3 !important;
+			border: 7px solid #F3F3F3; /* Hack for IE, need to fix. Has to do with an extra 1px of whitespace between #content and #main. */
+			padding: 20px; }
+
+
+
+
+/* =Login
+--------------------*/
+body#login div.inner,
+body#login #user-password,
+body#login #remember-password,
+body#login #remember-password input,
+body#login #forgot-password input,
+body#login #sign-in { position: relative; }
+body#login #sitewrapper { width: 540px; margin: 0 auto;  }
+body#login #sitewrapper #header { width: 485px; }
+	body#login #sitewrapper h1 {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 16px;
+			padding-bottom: 7px;
+			border-bottom: 1px solid #A7A7A7;
+			margin-bottom: 10px; }
+	body#login #sitewrapper fieldset#user-email {
+		font-size: 12px; }
+		body#login #sitewrapper fieldset#user-email p { }
+			body#login #sitewrapper fieldset#user-email p span {
+				width: 395px;
+				margin-top: 0px; }
+				body#login #sitewrapper fieldset#user-email p span input {
+					width: 385px; }
+	body#login #sitewrapper fieldset#user-password {
+		border-bottom: 20px solid #FFFFFF; }
+		body#login #sitewrapper fieldset#user-password p {
+			width: 400px; }
+			body#login #sitewrapper fieldset#user-password p span {
+				width: 200px;
+				margin-top: 5px; }
+				body#login #sitewrapper fieldset#user-password p span input {
+					width: 190px; }
+			body#login #sitewrapper fieldset#user-password p strong {
+				font-weight: normal;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 12px;
+				margin: 29px 10px 0 0;
+				float: right; }
+				body#login #sitewrapper fieldset#user-password p strong a { }
+	body#login #sitewrapper label#remember-password {
+		float: right;
+		position: relative;
+		z-index: 1000;
+		margin: 0px 85px 0 0;
+		font-size: 12px;
+		font-weight: bold;
+		font-family: Arial, Helvetica, sans-serif; }
+		body#login #sitewrapper label#remember-password input {
+			margin-right: 5px; }
+	body#login #sitewrapper #forgot-password {
+		padding: 20px 0 0 15px; }
+		body#login #sitewrapper #forgot-password label {
+			padding-left: 10px;
+			font-size: 12px; }
+
+.graph_thick_green,
+.graph_thick_yellow,
+.graph_thick_red,
+.graph_thick_no-bar {
+	height: 60px; }
+.graph_thin_green,
+.graph_thin_yellow,
+.graph_thin_red,
+.graph_thin_no-bar {
+	height: 23px; }
+
