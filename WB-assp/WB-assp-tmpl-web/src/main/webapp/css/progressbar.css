@@ -1,0 +1,56 @@
+	/*html5*/
+article,aside,dialog,footer,header,section,footer,nav,figure,menu{display:block}	
+		.progress{
+			 position :  absolute ;
+			 top :  50% ;
+			 left :  50% ;
+			 z-index :  10 ;
+			 width :  260px ;
+			 height :  56px ;
+			 overflow :  hidden ;
+			 margin-top :  -38px ;
+			 margin-left :  -140px ;
+			 padding :  10px ;
+			 border :  1px solid #a1bee1 ;
+			 background :  #e9f0f7 ;
+			 color :  #8fb2d5 ;
+			 display : none ;
+			 font-size :  12px;
+		}
+	
+	  .progress-head{
+		  	height :  16px ;
+			color :  #5591ce ;
+			line-height :  16px;
+	  } 
+	
+	  .progress-body{
+	  	 position :  relative ;
+		 margin-top :  10px ;
+		 margin-bottom :  10px ;
+		 height :  6px;
+	  } 
+		  
+	  .progress-bar {
+		 position :  absolute ;
+		 top :  0 ;
+		 left :  0 ;
+		 width :  206px ;
+		 height :  6px ;
+		 border :  1px solid #76abe1;
+	 	} 
+	
+	  .progress-background  {
+		 display :  inline-block ;
+		 position :  absolute ;
+		 top :  0 ;
+		 left :  0 ;
+		 z-index :  1 ;
+		 height :  6px ;
+		 background :  #76abe1;
+	} 
+	  .progress-num  {
+		 position :  absolute ;
+		 top :  -7px ;
+		 right :  0 ;
+	 } 

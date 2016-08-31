@@ -431,6 +431,7 @@
     <module>WB-assp-tmpl-service</module>
     <module>WB-assp-site-service</module>
     <module>WB-assp-site-web</module>
+    <module>WB-assp-tmpl-web</module>
   </modules>
   
    	<dependencyManagement>

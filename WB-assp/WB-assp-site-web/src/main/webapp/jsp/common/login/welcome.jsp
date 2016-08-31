@@ -40,7 +40,7 @@
 					<div class="column-bottom">
 						<img src="<%=rootPath%>/images/flow_image.png" />
 						<shiro:hasPermission name="wms:manage:createsite">
-						<a class="create-btn" href="/DL-wms-web/jsp/template/selectTemplate/selectTemplate.jsp">创建网站</a>
+						<a class="create-btn" href="/WB-assp-tmpl-web/jsp/template/selectTemplate/selectTemplate.jsp">创建网站</a>
 						</shiro:hasPermission>
 					</div><!--下部流程图-->
 				</div>

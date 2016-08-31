@@ -1,0 +1,79 @@
+.errorBox {
+	margin: 0 auto;
+	background: #fff;
+	overflow: hidden;
+}
+
+.errorBox-w {
+	width: 444px;
+	margin: 0 auto;
+	padding-top: 80px;
+}
+
+.errorBox-w h2 {
+	position: relative;
+	height: 78px;
+	overflow: hidden;
+	color: #97aebe;
+	font-size: 60px;
+	line-height: 1;
+	*line-height: 78px;
+	*top: -8px;
+}
+
+.errorBox-w h2,
+.errorBox-w p,
+.errorBox-w .errorBox-btn {
+	width: 296px;
+	margin: 0 auto;
+}
+
+.errorBox-w p {
+	color: #97aebe;
+	font-size: 16px;
+}
+
+.errorBox-w .errorBox-btn {
+	height: 36px;
+	margin-top: 46px;
+}
+
+.errorBox-w .errorBox-btn a {
+	display: inline-block;
+	width: 130px;
+	height: 34px;
+	border: 1px solid #9fb4c3;
+	border-radius: 17px;
+	background: #fff;
+	color: #97aebe;
+	font-size: 12px;
+	text-align: center;
+	text-decoration: none;
+	line-height: 34px;
+}
+
+.errorBox-w .errorBox-btn a.errorBtn-home {
+	float: right;
+}
+
+.errorBox-w .errorBox-btn a.errorBtn-home,
+.errorBox-w .errorBox-btn a.errorBtn-prev:hover {
+	border-color: #0089e0;
+	background: #0089e0;
+	color: #fff;
+}
+
+.errorBox-w .errorBox-btn a.errorBtn-home:hover {
+	border: 1px solid #9fb4c3;
+	background: #fff;
+	color: #97aebe;
+}
+
+.errorBox-w .errorBox-btn a.errorBtn-prev {
+	float: left;
+}
+
+.errorBox-img {
+	margin-top: 76px;
+	margin-bottom: 104px;
+}

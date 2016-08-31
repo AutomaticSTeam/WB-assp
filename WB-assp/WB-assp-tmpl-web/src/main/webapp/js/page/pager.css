@@ -1,0 +1,93 @@
+/*page*/
+
+.page {
+	width:680px;
+	margin: 25px auto 0;
+	overflow:hidden;
+}
+
+.page li{
+	float:left;
+	width: 26px;
+	height: 26px;
+	margin-right: 10px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	background: #fff;
+	color: #9f9f9f;
+	line-height: 26px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.page li:hover {
+	color: #297cd0;
+	border: 1px solid #297cd0;
+}
+
+.page .pgCurrent {
+	border: 1px solid #297cd0;
+	background: #297cd0;
+	color: #fff;
+}
+.page .pgCurrent:hover{
+	color:#fff;
+}
+
+.page .pgNext,
+.page li.thpoint {
+	position: relative;
+	width: auto;
+	text-align: left;
+}
+
+.page .pgNext {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.page li.thpoint {
+	border:0;
+}
+
+.page li.thpoint input{
+	margin:0 6px;
+	padding:4px 4px 5px;
+	border:1px solid #ccc;
+	color:#9f9f9f;
+	vertical-align: 2px;
+	 text-align:center;
+}
+
+
+#page .txt,
+#page .pageNum,
+#page .inputPage,
+#page .inputPage span {
+	border: 0;
+	width: auto;
+	color: #333;
+}
+
+#page .inputText {
+	width: 40px;
+}
+
+#page .inputPage {
+	position: relative;
+	top: -3px;
+	vertical-align: middle;
+}
+
+#page .inputPage span {
+	float: left;
+}
+
+#page .btn-submit {
+	height: 28px;
+	padding: 0 5px;
+	border: 1px solid #d3d3d3;
+	border-radius: 2px;
+	background: none;
+	cursor: pointer;
+}
