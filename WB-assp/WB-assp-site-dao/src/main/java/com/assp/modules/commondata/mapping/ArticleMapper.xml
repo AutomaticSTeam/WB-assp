@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.commondata.mapper.ArticleMapper">
+
+    <!-- 通过条件查找对应的文章列表 -->
+    <select id="selectArtlclesByVo" resultType="com.assp.modules.commondata.entity.Article" parameterType="com.assp.modules.commondata.entity.ArticleVo">
+            SELECT DISTINCT
+			        wa.article_id as articleId,
+					wa.article_title as articleTitle,
+					wa.article_author as articleAuthor,
+					wa.article_url as articleUrl,
+					wa.article_size as articleSize,
+					wa.article_brief as articleBrief,
+					wa.article_content as articleContent,
+					wa.article_attachment_img AS articleAttachmentImg,
+					wa.article_word_num as articleWordNum,
+					wa.operator_id as operatorId,
+					wa.update_time as updateTime,
+					wa.create_time as createTime,
+					wa.data_status as dataStatus,
+					wa.operator_name as operatorName,
+					wat.article_type_id as articleTypeId,
+					wa.article_top AS articleTop,
+					wat.article_type_name as articleTypeName
+			FROM wms_article AS  wa
+			INNER JOIN wms_article_rel_type art
+			ON wa.article_id = art.article_id
+			LEFT JOIN wms_article_type as wat
+			ON art.article_type_id = wat.article_type_id
+			WHERE wa.data_status = 0 
+			   <if test="articleTypeId != null">
+			       AND art.article_type_id = #{articleTypeId}
+			   </if>
+			   	<if test="articleReview != null">
+  					AND wa.article_review = #{articleReview}
+  				</if>
+			   <if test="articleTypeIds != null">
+			        AND art.article_type_id  in
+		            <foreach item="item" index="index" collection="articleTypeIds" 
+		                         open="(" separator="," close=")">
+		                        #{item}
+		             </foreach>
+			   </if>
+			   
+			     <if test="articleId != null">
+			       AND wa.article_id  = #{articleId}
+			   </if>
+			    <if test="articleId != null">
+			       AND wa.article_title  like  '%${articleTitle}%'
+			   </if>
+                ORDER BY wa.article_top DESC , wa.update_time  DESC
+    </select>
+    
+    	<!-- t添加文章返回ID -->
+  	<insert id="insertArticle" parameterType="com.assp.modules.commondata.entity.Article"  >
+   		 INSERT INTO wms_article
+     	 (
+			article_title,
+			article_author,
+			article_url,
+			article_size,
+			article_ntro,
+			article_brief,
+			article_content,
+			article_attachment_img,
+			article_word_num,
+			operator_id,
+			operator_name,
+			update_time,
+			create_time,
+			data_status,
+			article_top,
+			article_source,
+			article_review,
+			site_id
+    	  )
+  	  VALUES
+  	  (
+     	   #{articleTitle },
+     	   #{articleAuthor },
+           #{articleUrl},
+    	   #{articleSize},
+           #{articleNtro},
+       	   #{articleBrief},
+           #{articleContent},
+           #{articleAttachmentImg},
+           #{articleWordNum},
+           #{operatorId},
+           #{operatorName},
+           #{updateTime},
+           #{createTime},
+           #{dataStatus},
+           #{articleTop},
+           #{articleSource},
+           #{articleReview},
+           #{siteId}
+    	)
+	 <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="articleId">
+	   		SELECT LAST_INSERT_ID() AS articleId
+	 </selectKey>
+   </insert>
+  
+  	<!-- 通过条件查找文章-->
+  	<select id="selectArticlesByCondition" resultType="com.assp.modules.commondata.entity.Article" parameterType="com.assp.modules.commondata.entity.Article">
+  			SELECT DISTINCT
+  				wa.article_id AS articleId,
+  				wa.article_title AS articleTitle,
+  				wa.article_author AS articleAuthor,
+  				wa.article_url AS articleUrl,
+  				wa.article_size AS articleSize,
+  				wa.article_ntro AS articleNtro,
+  				wa.article_brief AS articleBrief,
+  				wa.article_content AS articleContent,
+  				wa.article_attachment_img AS articleAttachmentImg,
+  				wa.article_word_num AS articleWordNum,
+  				wa.operator_id AS operatorId,
+  				wa.operator_name AS operatorName,
+  				wa.update_time AS updateTime,
+  				wa.create_time AS createTime,
+  				wa.data_status AS dataStatus,
+  				wa.article_top AS articleTop,
+  				wa.article_source AS articleSource,
+  				wa.article_review AS articleReview
+  			FROM 
+  			wms_article AS wa
+  			LEFT JOIN wms_article_rel_type AS wart
+  			ON  wa.article_id = wart.article_id
+  			WHERE wa.data_status = 0
+  				<if test="articleTitle != null">
+  					AND wa.article_title LIKE '%${articleTitle}%'
+  				</if>
+  					<if test="articleReview != null">
+  					AND wa.article_review = #{articleReview}
+  				</if>
+  				
+  				<if test="articleTypes != null">
+  					AND wart.article_type_id IN
+  					<foreach item="item" index="index" collection="articleTypes"  open="(" separator="," close=")">
+		                     #{item}
+  					</foreach>
+  				</if>
+  				<if test="articleIds != null">
+  					AND wa.article_id IN
+  					<foreach item="item" index="index" collection="articleIds"  open="(" separator="," close=")">
+		                     #{item}
+  					</foreach>
+  				</if>
+  				
+  			ORDER BY wa.article_top DESC
+  					, wa.update_time DESC
+  			<if test="reviewSort == null || reviewSort == 0 ">
+  					   ,wa.article_review  ASC
+  		     </if>
+  		     <if test="reviewSort != null">
+  					    ,wa.article_review  DESC
+  		     </if>
+  			<if test="limitNum != null">
+  					   limit     #{limitNum}
+  		     </if>
+  			
+  	</select>
+  	<!-- 批量修改文章内容 -->
+  	<update id="bathUpdateArticle" parameterType="com.assp.modules.commondata.entity.Article">
+  		UPDATE wms_article
+  		<set>
+  			<if test="articleTitle != null">
+  				article_title = #{articleTitle},
+  			</if>
+  			<if test="articleAuthor != null">
+  				article_author = #{articleAuthor},
+  			</if>
+  			<if test="articleUrl != null">
+  				article_url = #{articleUrl},
+  			</if>
+  			<if test="articleNtro != null">
+  				article_ntro = {articleNtro},
+  			</if>
+  			<if test="articleBrief != null">
+  				article_brief = #{articleBrief},
+  			</if>
+  			<if test="articleContent != null">
+  				article_content = #{articleContent},
+  			</if>
+  			<if test="articleAttachmentImg !=null">
+  				article_attachment_img = #{articleAttachmentImg},
+  			</if>
+  			<if test="operatorName != null">
+  				operator_name = #{operatorName},
+  			</if>
+  			<if test="createTime != null">
+  				create_time = #{createTime},
+  			</if>
+  			<if test="updateTime != null">
+  				update_time = #{updateTime},
+  			</if>
+  			<if test="articleTop != null">
+  				article_top = #{articleTop},
+  			</if>
+  			<if test="articleSource != null">
+  				article_source = #{articleSource},
+  			</if>
+  			<if test="articleReview != null">
+  				article_review = #{articleReview},
+  			</if>
+  			<if test="dataStatus != null">
+  				data_status = #{dataStatus}
+  			</if>  			
+  		</set>
+  		WHERE
+  			<if test="articleId != null">
+  					article_id = #{articleId}
+  			</if>
+  			<if test="articleIds != null">
+  					article_id in 
+  						<foreach item="item" index="index" collection="articleIds"
+  							open="(" separator="," close=")">
+  									#{item}
+  						</foreach>
+  			</if>
+  	</update>
+  	
+    <select id="queryAllArticleVyTypeId"  resultType="com.assp.modules.commondata.entity.Article"  parameterType="java.lang.Integer" >
+		SELECT
+			wms_article.article_id AS articleId,
+			wms_article.article_title AS articleTitle,
+			wms_article.article_author AS articleAuthor,
+			wms_article.article_url AS articleUrl,
+			wms_article.article_ntro AS articleNtro,
+			wms_article.article_brief AS articleBrief,
+			wms_article.article_content AS articleContent,
+			wms_article.article_attachment_img AS articleAttachmentImg,
+			wms_article.article_word_num AS articleWordNum,
+			wms_article.article_source AS articleSource,
+			wms_article.create_time AS createTime,
+			wms_article.operator_name AS operatorName
+		FROM
+			wms_article
+		INNER JOIN wms_article_rel_type ON wms_article_rel_type.article_id=wms_article.article_id AND wms_article_rel_type.article_type_id=#{id}
+		WHERE
+			wms_article.data_status = 0 
+			AND
+			wms_article.article_review = 1
+			</select>
+			
+	<select id="selectArticlesByTypeId"  resultType="com.assp.modules.commondata.entity.Article"  parameterType="java.lang.Integer" >
+		SELECT 		
+			wa.article_id as articleId,
+			wa.article_title as articleTitle,
+			wa.article_author as articleAuthor,
+			wa.article_url as articleUrl,
+			wa.article_size as articleSize,
+			wa.article_brief as articleBrief,
+			wa.article_content as articleContent,
+			wa.article_attachment_img AS articleAttachmentImg,
+			wa.article_word_num as articleWordNum,
+			wa.operator_id as operatorId,
+			wa.update_time as updateTime,
+			wa.create_time as createTime,
+			wa.data_status as dataStatus,
+			wa.operator_name as operatorName,
+			wa.article_top AS articleTop	
+		FROM
+			wms_article AS wa
+		JOIN wms_article_rel_type AS wart ON wart.article_id=wa.article_id 
+			AND wart.article_type_id=#{id}
+		WHERE wa.article_review=1
+	</select>
+</mapper>

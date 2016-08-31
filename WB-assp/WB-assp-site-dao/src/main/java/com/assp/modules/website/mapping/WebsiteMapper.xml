@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.assp.modules.website.mapper.WebsiteMapper" >
+  
+  <!--添加website实例并返回主键id -->
+<insert id="insertWebsite" parameterType="com.assp.modules.website.entity.Website"  >
+    INSERT INTO wms_website
+        (
+			site_name,
+			site_domain,
+			site_port,
+			site_ip,
+			create_time,
+			update_time,
+			dead_time,
+			site_status
+        )
+     VALUES
+	    (
+	        #{siteName },
+	        #{siteDomain },
+	        #{sitePort },
+	        #{siteIp },
+	        #{createTime },
+	        #{updateTime },
+	        #{deadTime },
+	        #{siteStatus }
+	    )
+	<selectKey resultType="java.lang.Integer" order="AFTER"  keyProperty="siteId">
+		SELECT LAST_INSERT_ID() AS siteId
+	</selectKey>
+</insert>
+
+  <select id="creaetMainSyncSql"   statementType="CALLABLE" >
+  	<![CDATA[DROP PROCEDURE IF EXISTS executeSyncSQL;  
+		DELIMITER   
+		CREATE PROCEDURE executeSyncSQL(in templateId INT(11) , in siteId INT(11)) 
+		BEGIN  
+		    CALL schema_change('wms_site');
+		    SET @siteTemplateId = 0 ;
+		    CALL template_to_site(templateId,siteId,@rst);
+		    SELECT @rst INTO @siteTemplateId;
+		    CALL columns_to_site(templateId,siteId); 
+		    CALL columns_rel_siteTemplate(templateId,siteId,@siteTemplateId); 
+		    CALL columns_rel_frames(siteId);
+		    CALL sync_site_modules(siteId);
+		    CALL sync_frames_rel_modules(siteId);
+		    CALL sync_module_rel_contents(siteId); 
+		    CALL sync_article_datas(siteId); 
+		    CALL sync_media_datas(siteId); 
+		    CALL sync_picture_datas(siteId); 
+		    CALL sync_logo_datas(siteId); 
+		    CALL sync_footer_datas(siteId); 
+		    CALL update_module_rel_contents(siteId); 
+		END   
+		DELIMITER ;]]>
+       
+    </select>
+    
+    <select id="changeSyncSql"   statementType="CALLABLE" >
+    	<![CDATA[DROP PROCEDURE IF EXISTS batchSyncSQL;  
+		DELIMITER 
+		CREATE PROCEDURE batchSyncSQL() 
+		BEGIN  
+		     CALL executeSyncSQL('wms_template_rel_columns');
+		     CALL executeSyncSQL('wms_template_columns');
+		     CALL executeSyncSQL('wms_template_columns_rel_frame');
+		     CALL executeSyncSQL('wms_template_module');
+		     CALL executeSyncSQL('wms_template_frame_rel_module');
+		     CALL executeSyncSQL('wms_template_module_rel_content');
+		     CALL executeSyncSQL('wms_template_rel_columns');
+		     CALL executeSyncSQL('wms_article_type');
+		     CALL executeSyncSQL('wms_article');
+		     CALL executeSyncSQL('wms_article_rel_type');
+		     CALL executeSyncSQL('wms_media_type');
+		     CALL executeSyncSQL('wms_media');
+		     CALL executeSyncSQL('wms_media_rel_type');
+		     CALL executeSyncSQL('wms_picture_album_type');
+		     CALL executeSyncSQL('wms_picture_album');
+		     CALL executeSyncSQL('wms_picture_album_rel_type');
+		     CALL executeSyncSQL('wms_picture');
+		     CALL executeSyncSQL('wms_template_logo');
+		     CALL executeSyncSQL('wms_template_footer');
+		     CALL executeSyncSQL('wms_template_footer_rel_columns');
+		END  
+		DELIMITER ; ]]>
+    </select>
+     
+    
+  	<select id="executeSync" parameterType="com.assp.modules.website.entity.Website" resultType="java.lang.Integer" statementType="CALLABLE" >
+  		 CALL executeSyncSQL(#{templateId},#{siteId},#{tmplIpAddress},#{siteIpAddress},#{templateCode},#{siteCode}); 
+     </select>
+
+      <!--  批量更新状态 -->
+       	<select id="batchSyncSQL"   statementType="CALLABLE" >
+  		      CALL  batchSyncSQL() ; 
+     </select>
+</mapper>

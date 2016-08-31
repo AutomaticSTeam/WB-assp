@@ -1,0 +1,220 @@
+.main-cotainer {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.main {
+	width: 1200px;
+	margin: 0 auto;
+	clear: both;
+}
+
+
+/*左侧焦点图开始*/
+
+.cloumn-focus {
+	float: left;
+	width: 432px;
+	height: 200px;
+	border-radius: 3px;
+	position: relative;
+}
+
+.cloumn-focus img {
+	float: left;
+}
+
+.label {
+	display: block;
+	width: 77px;
+	height: 76px;
+	background: url(../images/label_image.png) center no-repeat;
+	position: absolute;
+	top: -2px;
+	left: 0;
+}
+
+
+/*左侧焦点图结束*/
+
+
+/*右侧网站列表开始*/
+
+.column-list {
+	width: 747px;
+	height: 200px;
+	overflow: auto;
+	border-radius: 3px;
+	float: right;
+	background: #fff;
+}
+
+.empt-flag {
+	font-size: 17px;
+	color: #e1e1e1;
+	font-weight: bolder;
+	height: 200px;
+	line-height: 200px;
+	background: url(../images/empty_flag.png) 270px center no-repeat;
+	padding-left: 60px;
+	text-align: center;
+}
+
+.column-list-view-item {
+	padding: 0 20px;
+	overflow: hidden;
+	height: 59px;
+	line-height: 60px;
+	border-bottom: 1px solid #e3e4e5;
+}
+
+.column-list-view-item:hover {
+	background: #f5f5f5;
+}
+
+.column-list-view-item h2 {
+	font-weight: normal;
+	font-size: 13px;
+	color: #999999;
+	float: left;
+}
+
+.admin-btn {
+	float: right;
+	width: 115px;
+	height: 34px;
+	line-height: 34px;
+	background: #60b58e;
+	font-size: 13px;
+	color: #fff;
+	text-align: center;
+	margin-top: 13px;
+	text-decoration: none;
+}
+
+.admin-btn:hover {
+	background: #78aaf1;
+}
+
+
+/*右侧网站列表结束*/
+
+
+/*流程图开始*/
+
+.column-bottom {
+	background: #fff;
+	margin-top: 20px;
+	float: left;
+	height: 424px;
+	position: relative;
+}
+
+.column-bottom img {
+	float: left;
+}
+
+.create-btn {
+	display: block;
+	width: 380px;
+	height: 42px;
+	position: absolute;
+	left: 50%;
+	margin-left: -190px;
+	border: 1px solid #ff9c00;
+	text-align: center;
+	line-height: 44px;
+	border-radius: 3px;
+	bottom: 45px;
+	color: #FF9C00;
+	font-size: 13px;
+}
+
+.create-btn:hover {
+	background: #FF9C00;
+	color: #fff;
+	cursor: pointer;
+}
+
+.errorBox {
+	margin: 0 auto;
+	background: #fff;
+	overflow: hidden;
+}
+
+.errorBox-w {
+	width: 444px;
+	margin: 0 auto;
+	padding-top: 80px;
+}
+
+.errorBox-w h2 {
+	position: relative;
+	height: 78px;
+	overflow: hidden;
+	color: #97aebe;
+	font-size: 60px;
+	line-height: 1;
+	*line-height: 78px;
+	*top: -8px;
+}
+
+.errorBox-w h2,
+.errorBox-w p,
+.errorBox-w .errorBox-btn {
+	width: 296px;
+	margin: 0 auto;
+}
+
+.errorBox-w p {
+	color: #97aebe;
+	font-size: 16px;
+}
+
+.errorBox-w .errorBox-btn {
+	height: 36px;
+	margin-top: 46px;
+}
+
+.errorBox-w .errorBox-btn a {
+	display: inline-block;
+	width: 130px;
+	height: 34px;
+	border: 1px solid #9fb4c3;
+	border-radius: 17px;
+	background: #fff;
+	color: #97aebe;
+	font-size: 12px;
+	text-align: center;
+	text-decoration: none;
+	line-height: 34px;
+}
+
+.errorBox-w .errorBox-btn a.errorBtn-home {
+	float: right;
+}
+
+.errorBox-w .errorBox-btn a.errorBtn-home,
+.errorBox-w .errorBox-btn a.errorBtn-prev:hover {
+	border-color: #0089e0;
+	background: #0089e0;
+	color: #fff;
+}
+
+.errorBox-w .errorBox-btn a.errorBtn-home:hover {
+	border: 1px solid #9fb4c3;
+	background: #fff;
+	color: #97aebe;
+}
+
+.errorBox-w .errorBox-btn a.errorBtn-prev {
+	float: left;
+}
+
+.errorBox-img {
+	margin-top: 76px;
+	margin-bottom: 104px;
+}

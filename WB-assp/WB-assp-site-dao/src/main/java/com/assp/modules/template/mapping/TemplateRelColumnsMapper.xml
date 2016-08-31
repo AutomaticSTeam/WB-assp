@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.template.mapper.TemplateRelColumnsMapper">
+
+    
+    <!-- 根据模板id获取栏目列表 -->
+    <select id="selectByOrder" resultType="com.assp.modules.template.entity.TemplateRelColumns" parameterType="com.assp.modules.template.entity.TemplateRelColumns">
+         SELECT 
+	         template_rel_columns_id as templateRelColumnsId,
+	         template_id as templateId,
+	         columns_id as columnsId 
+         FROM wms_template_rel_columns 
+         WHERE
+         	rel_status = 0
+         <if test="templateId!=null">
+		   and template_id = #{templateId}
+		 </if>
+		 <if test="columnsId!=null">
+		   and columns_id = #{columnsId}
+		 </if>
+		   order by sort_num 
+    </select>
+    
+    <!-- 查询当前模板最大的排序号 -->
+    <select id="querySortNumMaxObj" resultType="com.assp.modules.template.entity.TemplateRelColumns" parameterType="java.lang.Integer">
+         SELECT 
+	         template_rel_columns_id as templateRelColumnsId,
+	         template_id as templateId,
+	         columns_id as columnsId ,
+	         sort_num as sortNum
+         FROM wms_template_rel_columns 
+         WHERE
+         	rel_status = 0
+         <if test="value != null">
+		    AND template_id = #{value}
+		 </if>
+		   order by sort_num DESC
+		   LIMIT 1
+    </select>
+</mapper>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.module.mapper.TemplateModuleMapper">
+
+   <resultMap id="templateModule" type="com.assp.modules.module.entity.TemplateModule">  
+          <id property="moduleId" column="module_id"/>  
+          <result property="modulePid" column="module_pid"/>  
+          <result property="moduleType" column="module_type"/>  
+          <result property="moduleName" column="module_name"/>  
+          <result property="moduleItemLineNum" column="module_item_line_num"/>  
+          <result property="moduleItemColumnNum" column="module_item_column_num"/>  
+          <result property="moduleTmpl" column="module_tmpl"/>  
+          <result property="moduleStyleType" column="module_style_type"/>  
+          <result property="pageShow" column="page_show"/>  
+          <result property="pageSize" column="page_size"/>  
+          <result property="moduleStyleHeight" column="module_style_height"/>  
+          <result property="moduleStyleWidth" column="module_style_width"/>  
+          <result property="showTitile" column="show_titile"/>  
+          <result property="extendUrl" column="extend_url"/> 
+          <result property="siteId" column="site_id"/> 
+          <result property="moduleStyleShow" column="module_style_show"/> 
+          <collection property="templateModuleRelContents"  ofType="com.assp.modules.module.entity.TemplateModuleRelContent">  
+		       <result property="contentDataType" column="content_data_type"/>  
+		       <result property="dataTargetTable" column="data_target_table"/>  
+		        <result property="dataColumnId" column="data_column_id"/>  
+	     </collection>  
+   </resultMap>  
+
+     <!-- 通过条件查找模块【仅供模板加载调用，如有需要请另行配置】 -->
+    <select id="selectTemplateModulesByVo"  resultMap="templateModule"  parameterType="com.assp.modules.module.entity.TemplateModuleVo">
+	       SELECT 
+				wtm.module_id  ,
+				wtm.module_pid  ,
+				wtm.module_type ,
+				wtm.module_name  ,
+				wtm.module_item_line_num ,
+				wtm.module_item_column_num ,
+				wtm.module_tmpl ,
+				wtm.module_style_type ,
+				 wtm.show_titile ,
+				 wtm.extend_url ,
+				 wtm.module_style_height,
+				 wtm.module_style_width ,
+				 wtm.module_style_show ,
+				 wtm.page_size ,
+				 wtm.page_show ,
+				 mrc.content_data_type  ,
+				 mrc.data_target_table ,
+				 mrc.data_column_id ,
+				 wtm.site_id
+			FROM wms_template_module  AS wtm
+			JOIN wms_template_module_rel_content AS mrc
+			ON wtm.module_id = mrc.module_id
+			WHERE wtm.data_status = 0
+			    AND mrc.rel_status = 0
+			    <if test="moduleId != null">
+			    AND wtm.module_id = #{moduleId}
+			    </if>
+			    <if test="modulePid != null">
+			    AND wtm.module_pid = #{modulePid}
+			    </if>
+			    <if test="siteId != null">
+			    AND wtm.site_id = #{siteId}
+			    </if>
+			     <if test="moduleIds != null">
+				      AND wtm.module_id IN
+			            <foreach item="item" index="index" collection="moduleIds" 
+			                         open="(" separator="," close=")">
+			                        #{item}
+			             </foreach>
+			   </if>
+    </select>
+    
+    <insert id="addModuleReturnId" parameterType="com.assp.modules.module.entity.TemplateModule"  >
+   	 INSERT INTO wms_template_module (
+   	 		module_pid,
+			module_type,
+			module_name,
+			module_tmpl,
+			module_item_line_num,
+			module_item_column_num,
+			show_titile,
+			extend_url,
+			create_time,
+			update_time,
+			operator_id,
+			operator_name,
+			page_show,
+			page_size,
+			module_style_type,
+			module_style_height,
+			module_style_width,
+			module_style_show,
+			data_status,
+			site_id
+		)
+		VALUES(
+		 #{modulePid},
+		 #{moduleType},
+		 #{moduleName},
+		 #{moduleTmpl},
+		 #{moduleItemLineNum},
+		 #{moduleItemColumnNum},
+		 #{showTitile},
+		 #{extendUrl},
+		 NOW(),
+		 NOW(),
+		 #{operatorId},
+		 #{operatorName},
+		 #{pageShow},
+		 #{pageSize},
+		 #{moduleStyleType},
+		 #{moduleStyleHeight},
+		 #{moduleStyleWidth},
+		 #{moduleStyleShow},
+		 #{dataStatus},
+		 #{siteId}
+		)
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="moduleId">
+			SELECT LAST_INSERT_ID() AS albumId
+		</selectKey>
+	</insert>
+</mapper>

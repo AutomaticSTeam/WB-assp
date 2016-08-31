@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.template.mapper.TemplateColumnsMapper">
+
+    
+    <!-- 根据模板id获取栏目列表 -->
+    <select id="selectTemplateColumnsByTemplateId" resultType="com.assp.modules.template.entity.TemplateColumns" parameterType="java.lang.Integer">
+         SELECT DISTINCT
+			   tc.columns_id as columnsId ,  
+			   tc.columns_name as columnsName,
+			   ct.columns_type_name as columnsTypeName,
+			   tc.columns_pid as columnsPid,
+			   tc.open_type as openType ,
+			   tc.custom_url as customUrl ,
+			   tc.data_status as dataStatus,
+			   trc.template_rel_columns_id  as templateRelColumnsId,
+			   trc.sort_num  as sortNum,
+			   tc.columns_icon as  columnsIcon ,
+			   tc.columns_type_id as  columnsTypeId ,
+			   trc.columns_hide as  columnsHide ,
+			   tc.columns_icon_active as  columnsIconActive
+			FROM wms_template_columns as tc 
+			INNER JOIN wms_template_rel_columns as trc  ON tc.columns_id = trc.columns_id
+			INNER JOIN  wms_columns_type as ct ON tc.columns_type_id = ct.columns_type_id
+			WHERE
+			   tc.data_status = 0 
+			   AND ct.data_status = 0
+			   AND trc.rel_status = 0
+			   AND trc.template_id = #{value}
+			   order by trc.sort_num
+    </select>
+    
+    <!-- 根据模板id获取栏目列表 -->
+    <select id="selectTemplateColumnsByTemplateRelColumns" resultType="com.assp.modules.template.entity.TemplateColumns" parameterType="com.assp.modules.template.entity.TemplateRelColumns">
+         SELECT DISTINCT
+			   tc.columns_id as columnsId ,  
+			   tc.columns_name as columnsName,
+			   ct.columns_type_name as columnsTypeName,
+			   tc.columns_pid as columnsPid,
+			   tc.open_type as openType ,
+			   tc.custom_url as customUrl ,
+			   tc.data_status as dataStatus,
+			   trc.template_rel_columns_id  as templateRelColumnsId,
+			   trc.sort_num  as sortNum,
+			   tc.columns_icon as  columnsIcon ,
+			   tc.columns_type_id as  columnsTypeId ,
+			   trc.columns_hide as  columnsHide ,
+			   tc.columns_icon_active as  columnsIconActive
+			FROM wms_template_columns as tc 
+			INNER JOIN wms_template_rel_columns as trc  ON tc.columns_id = trc.columns_id
+			INNER JOIN  wms_columns_type as ct ON tc.columns_type_id = ct.columns_type_id
+			WHERE
+			   tc.data_status = 0 
+			   AND ct.data_status = 0
+			   AND trc.rel_status = 0
+			   <if test="templateId != null">
+			   AND trc.template_id = #{templateId}
+			   </if>
+			   <if test="columnsId != null">
+			   AND trc.columns_id = #{columnsId}
+			   </if>
+			   <if test="relStatus != null">
+			   AND ifnull(trc.rel_status,0) = #{relStatus}
+			   </if>
+			   <if test="columnsHide != null">
+			   AND ifnull(trc.columns_hide,0) = #{columnsHide}
+			   </if>
+			   order by trc.sort_num
+    </select>
+    
+        <!-- 根据底部id 获取栏目列表 -->
+    <select id="selectTemplateColumnsInFooterByTemplateVO" resultType="com.assp.modules.template.entity.TemplateColumns" parameterType="com.assp.modules.template.entity.TemplateVo">
+         SELECT DISTINCT
+		   tc.columns_id as columnsId ,  
+		   tc.columns_name as columnsName,
+		   ct.columns_type_name as columnsTypeName,
+		   tc.columns_pid as columnsPid,
+		   tc.open_type as openType ,
+		   tc.custom_url as customUrl ,
+		   tc.data_status as dataStatus,
+		   tfrc.template_footer_rel_columns_id as templateFooterRelColumnsId ,
+		   tfrc.sort_num as sortNum ,
+		   case when tfrc.columns_id is null or tfrc.columns_hide=1 then 1 else 0 end as  columnsHide ,
+		   tc.columns_type_id as  columnsTypeId ,
+		   ct.columns_type_name as columnsTypeName
+		FROM wms_template_columns as tc 
+		INNER JOIN wms_template_rel_columns as trc  ON tc.columns_id = trc.columns_id
+		INNER JOIN  wms_columns_type as ct ON tc.columns_type_id = ct.columns_type_id
+		INNER JOIN  wms_template as tp ON tp.template_id = trc.template_id
+		left JOIN wms_template_footer_rel_columns as tfrc ON tc.columns_id = tfrc.columns_id  AND tfrc.rel_status = 0
+		WHERE
+		   tc.data_status = 0 
+		   AND ct.data_status = 0
+		   AND trc.rel_status = 0
+		    <if test="templateId != null">
+		       AND tp.template_id = #{templateId}
+			 </if>
+			<if test="siteId != null">
+			   AND ifnull(tp.site_id,0) = #{siteId}
+			</if>
+		  
+		   order by tfrc.sort_num
+    </select>
+        <!-- 根据底部id 获取栏目列表 -->
+    <select id="selectTemplateColumnsByTemplateFooterRelColumns" resultType="com.assp.modules.template.entity.TemplateColumns" parameterType="com.assp.modules.template.entity.TemplateFooterRelColumns">
+         SELECT DISTINCT
+		   tc.columns_id as columnsId ,  
+		   tc.columns_name as columnsName,
+		   ct.columns_type_name as columnsTypeName,
+		   tc.columns_pid as columnsPid,
+		   tc.open_type as openType ,
+		   tc.custom_url as customUrl ,
+		   tc.data_status as dataStatus,
+		   tfrc.template_footer_rel_columns_id as templateFooterRelColumnsId ,
+		   tfrc.sort_num as sortNum ,
+		   tfrc.columns_hide as  columnsHide ,
+		   tc.columns_type_id as  columnsTypeId ,
+		   ct.columns_type_name as columnsTypeName
+		FROM wms_template_columns as tc 
+		INNER JOIN wms_template_footer_rel_columns as tfrc ON tc.columns_id = tfrc.columns_id
+		INNER JOIN  wms_columns_type as ct ON tc.columns_type_id = ct.columns_type_id
+		WHERE
+		   tc.data_status = 0 
+		   AND ct.data_status = 0
+		   AND tfrc.rel_status = 0
+		    <if test="templateFooterId != null">
+		   AND tfrc.template_footer_id = #{templateFooterId}
+		   </if>
+		   <if test="columnsHide != null">
+		   AND ifnull(tfrc.columns_hide,0) = #{columnsHide}
+		   </if>
+		   <if test="relStatus != null">
+		   AND ifnull(tfrc.rel_status,0) = #{relStatus}
+		   </if>
+		   order by tfrc.sort_num
+    </select> 
+    
+     <insert id="addGetprimaryKey" parameterType="com.assp.modules.template.entity.TemplateColumns"  >
+   	INSERT INTO wms_template_columns (
+		columns_name,
+		columns_type_id,
+		columns_pid,
+		open_type,
+		custom_url,
+		columns_icon,
+		columns_icon_active
+	)
+	VALUES
+		(
+			#{columnsName},
+			#{columnsTypeId},
+			#{columnsPid},
+			#{openType},
+			#{customUrl},
+			#{columnsIcon},
+			#{columnsIconActive}
+		)
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="columnsId">
+			SELECT LAST_INSERT_ID() AS columnsId
+		</selectKey>
+	</insert>
+    
+</mapper>

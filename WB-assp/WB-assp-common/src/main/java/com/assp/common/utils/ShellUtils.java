@@ -55,26 +55,32 @@ public class ShellUtils {
 	}
 		
 	
-	public static ChannelExec runCmd(String cmd,String charset,ChannelExec channelExec) throws IOException {
+	public static int runCmd(String cmd,String charset,ChannelExec channelExec) throws IOException  {
 		logger.info("开始执行命令:"+cmd);
+		int rst = 0; // 0 成功 1 失败
 		channelExec.setCommand(cmd);
 		channelExec.setInputStream(null);
 		channelExec.setErrStream(System.err);
+		BufferedReader reader = null;
 		try {
 			channelExec.connect();
+			InputStream in = channelExec.getInputStream();
+			 reader = new BufferedReader(new InputStreamReader(in, Charset.forName(charset)));
+			String buf = null;
+			while ((buf = reader.readLine()) != null){
+				logger.info("执行结果："+buf);
+			}
+			logger.info("执行成功");
 		} catch (JSchException e) {
+			rst = 1;
 			e.printStackTrace();
-				logger.info("执行失败");
+			logger.info("执行失败");
+		}finally{
+			if(reader != null ){
+				reader.close();
+			}
 		}
-		InputStream in = channelExec.getInputStream();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in, Charset.forName(charset)));
-		String buf = null;
-		while ((buf = reader.readLine()) != null){
-			logger.info("执行结果："+buf);
-		}
-		logger.info("执行成功");
-		reader.close();
-		return channelExec;
+		return rst;
 	}
 	
 }

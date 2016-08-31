@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.commondata.mapper.ArticleRelTypeMapper">
+
+      <!-- 通过条件查找视频管理类型 -->
+    <select id="selectArticleRelTypeByCdt" resultType="com.assp.modules.commondata.entity.ArticleRelType" parameterType="com.assp.modules.commondata.entity.ArticleRelType">
+          SELECT DISTINCT
+		  wart.article_rel_type_id as articleRelTypeId,
+		  wart.article_type_id as articleTypeId,
+		  wart.article_id as articleId ,
+		  wat.article_type_name as articleTypeName
+		FROM wms_article_rel_type AS wart
+		LEFT JOIN wms_article_type as wat
+		ON wart.article_type_id = wat.article_type_id
+		WHERE
+		  <if test="articleId != null">
+		        wart.article_id  = #{articleId}
+		  </if>
+		   <if test="articleTypeId != null">
+		         wart.article_type_id  = #{articleTypeId}
+		  </if>
+    </select>
+    <!-- 批量删除 -->
+    <delete id="bathDelByArticleIds" parameterType="List">  
+   	 DELETE FROM wms_article_rel_type WHERE article_id IN  
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+        #{item}   
+    </foreach>  
+	</delete>
+</mapper>

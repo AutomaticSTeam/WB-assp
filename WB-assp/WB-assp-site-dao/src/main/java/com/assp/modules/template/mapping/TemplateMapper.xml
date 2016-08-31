@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.template.mapper.TemplateMapper">
+
+    
+    <!-- 查询模板，然后根据自己查询相关收藏的 -->
+    <select id="queryTemplateByCondition" resultType="com.assp.modules.template.entity.Template" parameterType="com.assp.modules.template.entity.Template">
+         SELECT 
+			   tc.template_id as templateId ,  
+			   tc.template_code as templateCode,
+			   tc.template_name as templateName,
+			   tc.industry_type_id as industryTypeId,
+			   tc.color_id as colorId ,
+			   tc.platform_id as platformId ,
+			   tc.template_banner_id as templateBannerId,
+			   tc.template_logo_id  as templateLogoId,
+			   tc.template_footer_id  as templateFooterId,
+			   tc.template_thumbnail_url as  templateThumbnailUrl ,
+			   tc.is_effect as  isEffect ,
+			   tc.is_recommended as  isRecommended ,
+			   tc.template_size as  templateSize ,
+			   tc.template_standard_width as  templateStandardWidth ,
+			   tc.template_standard_height as  templateStandardHeight ,
+			   tc.operator_id as  operatorId ,
+			   tc.operator_name as  operatorName ,
+			   tc.is_contains_vedio as  isContainsVedio ,
+			   (select distinct urt.user_id from wms_user_rel_template as urt where urt.user_id=#{userId} and urt.template_id=tc.template_id) isCollect ,
+			   tc.template_view_url as  templateViewUrl
+			FROM wms_template as tc 
+			WHERE
+			   tc.data_status = 0 
+			   
+			 <if test="templateId != null">
+             and tc.template_id = #{templateId}
+           </if>
+			 <if test="industryTypeId != null">
+             and tc.industry_type_id = #{industryTypeId}
+           </if>
+			 <if test="colorId != null">
+             and tc.color_id = #{colorId}
+           </if>
+			 <if test="isRecommended != null">
+             and tc.is_recommended = #{isRecommended}
+           </if>
+			 <if test="isContainsVedio != null">
+             and ifnull(tc.is_contains_vedio,0) = #{isContainsVedio}
+           </if>
+           order by tc.update_time desc
+    </select>
+    <!-- 根据模板收藏列表 -->
+    <select id="queryTemplateIncollectByCondition" resultType="com.assp.modules.template.entity.Template" parameterType="com.assp.modules.template.entity.Template">
+         SELECT 
+			   tc.template_id as templateId ,  
+			   tc.template_code as templateCode,
+			   tc.template_name as templateName,
+			   tc.industry_type_id as industryTypeId,
+			   tc.color_id as colorId ,
+			   tc.platform_id as platformId ,
+			   tc.template_banner_id as templateBannerId,
+			   tc.template_logo_id  as templateLogoId,
+			   tc.template_footer_id  as templateFooterId,
+			   tc.template_thumbnail_url as  templateThumbnailUrl ,
+			   tc.is_effect as  isEffect ,
+			   tc.is_recommended as  isRecommended ,
+			   tc.template_size as  templateSize ,
+			   tc.template_standard_width as  templateStandardWidth ,
+			   tc.template_standard_height as  templateStandardHeight ,
+			   tc.operator_id as  operatorId ,
+			   tc.operator_name as  operatorName ,
+			   tc.is_contains_vedio as  isContainsVedio ,
+			   #{userId} as  isCollect ,
+			   tc.template_view_url as  templateViewUrl
+			FROM wms_template as tc 
+			LEFT JOIN wms_user_rel_template as urt  ON urt.template_id = tc.template_id
+			WHERE
+			   tc.data_status = 0 
+			   and urt.user_id= #{userId}
+			   and urt.user_rel_template_id is not null
+			 <if test="templateId != null">
+             and tc.template_id = #{templateId}
+           </if>
+			 <if test="industryTypeId != null">
+             and tc.industry_type_id = #{industryTypeId}
+           </if>
+			 <if test="colorId != null">
+             and tc.color_id = #{colorId}
+           </if>
+			 <if test="isRecommended != null">
+             and tc.is_recommended = #{isRecommended}
+           </if>
+			 <if test="isContainsVedio != null">
+             and ifnull(tc.is_contains_vedio,0) = #{isContainsVedio}
+           </if>
+           order by tc.update_time desc
+    </select>
+    
+    <update id="batchUpdateTemplate" parameterType="com.assp.modules.template.entity.Template">
+	    UPDATE wms_template 
+	     <set> 
+	         <if test="dataStatus != null">
+	           data_status = #{dataStatus} ,
+	       	 </if>
+	         <if test="updateTime != null ">
+	           update_time = #{updateTime} ,
+	       	 </if>
+	       	 <if test="operatorName != null ">
+	           operator_name = #{operatorName} ,
+	       	 </if>
+	       	 <if test="operatorId != null ">
+	           operator_id = #{operatorId} ,
+	       	 </if>
+		 </set>
+		WHERE
+		<if test="templateId != null">
+			template_id =  #{templateId}
+		</if>
+		<if test="templateIds != null">
+	        template_id  in
+            <foreach item="item" index="index" collection="templateIds" 
+                         open="(" separator="," close=")">
+                        #{item}
+            </foreach>
+		</if>
+    </update>
+    
+    <!-- 查询模板，然后根据自己查询相关收藏的 -->
+    <select id="queryMaxTemplateCode" resultType="com.assp.modules.template.entity.Template" parameterType="com.assp.modules.template.entity.Template">
+         SELECT 
+			   tc.template_id as templateId ,  
+			   tc.template_code as templateCode,
+			   tc.template_name as templateName,
+			   tc.industry_type_id as industryTypeId,
+			   tc.color_id as colorId ,
+			   tc.platform_id as platformId ,
+			   tc.template_banner_id as templateBannerId,
+			   tc.template_logo_id  as templateLogoId,
+			   tc.template_footer_id  as templateFooterId,
+			   tc.template_thumbnail_url as  templateThumbnailUrl ,
+			   tc.is_effect as  isEffect ,
+			   tc.is_recommended as  isRecommended ,
+			   tc.template_size as  templateSize ,
+			   tc.template_standard_width as  templateStandardWidth ,
+			   tc.template_standard_height as  templateStandardHeight ,
+			   tc.operator_id as  operatorId ,
+			   tc.operator_name as  operatorName ,
+			   tc.is_contains_vedio as  isContainsVedio ,
+			   tc.template_view_url as  templateViewUrl
+			FROM wms_template as tc 
+			WHERE 1=1 
+			and tc.data_status = 0 
+           order by tc.template_code desc
+           limit 1 
+    </select>
+    
+    <insert id="insertKey" parameterType="com.assp.modules.template.entity.Template" >
+	  <selectKey resultType="java.lang.Integer" keyProperty="templateId" order="AFTER" >
+	    SELECT @@IDENTITY
+	  </selectKey>
+	  insert into wms_template (template_id, template_code, template_name,industry_type_id,
+	    platform_id, template_logo_id, template_banner_id, template_footer_id,
+	    template_thumbnail_url, template_view_url, is_effect, is_recommended,
+	    template_size, template_standard_width, template_standard_height,operator_id,operator_name,
+	    create_time,update_time,data_status,is_contains_vedio,color_id)
+	  values (#{templateId,jdbcType=INTEGER}, #{templateCode,jdbcType=VARCHAR}, 
+	    #{templateName,jdbcType=VARCHAR}, #{industryTypeId,jdbcType=INTEGER}, #{platformId,jdbcType=INTEGER}, 
+	    #{templateLogoId,jdbcType=INTEGER}, #{templateBannerId,jdbcType=INTEGER}, #{templateFooterId,jdbcType=INTEGER}, 
+	    #{templateThumbnailUrl,jdbcType=VARCHAR}, #{templateViewUrl,jdbcType=VARCHAR}, #{isEffect,jdbcType=INTEGER},
+	    #{isRecommended,jdbcType=INTEGER},#{templateSize,jdbcType=INTEGER},#{templateStandardWidth,jdbcType=VARCHAR},
+	    #{templateStandardHeight,jdbcType=VARCHAR},#{operatorId,jdbcType=INTEGER},#{operatorName,jdbcType=VARCHAR},
+	    #{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{dataStatus,jdbcType=INTEGER},
+	    #{isContainsVedio,jdbcType=INTEGER},#{colorId,jdbcType=VARCHAR})
+	</insert>
+</mapper>

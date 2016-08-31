@@ -1,0 +1,135 @@
+<div class="imgTextPop">
+	<div class="pop-head pop-tab-title">
+		<a data-tab="01" class="active" href="javscript:;">常规</a>
+	</div><!--pop-head-->
+	<div class="pop-body">
+		<div class="popTabContent-item popTabContent-01">
+			<div class="pop-form">
+				<div class="popForm-item">
+					<label>模块标题：</label>
+					<div class="label-con">
+						<input class="inputText content-title" type="text" />
+					</div>
+				</div>
+				<div class="popForm-item">
+					<label>模块样式：</label>
+					<div class="label-con">
+						<div class="images-css">
+							<img data-css="1" class="active" src="../../../../../images/imgTxt_img01.png" alt="" />
+							<img data-css="2" src="../../../../../images/imgTxt_img02.png" alt="" />
+							<img data-css="3" src="../../../../../images/imgTxt_img03.png" alt="" />
+							<img data-css="4" src="../../../../../images/imgTxt_img04.png" alt="" />
+							<img data-css="5" src="../../../../../images/imgTxt_img05.png" alt="" />
+							<!--<img data-css="5" src="../../../../../images/imgTxt_img06.png" alt="" />-->
+						</div>
+					</div>
+				</div>
+				<div class="popForm-item">
+					<label>模块内容：</label>
+				</div>
+				<div class="w100p">	
+					<div class="imagesText-uploadImg">
+						<div class="popForm-item">
+							<label>图片文件：</label>
+							<div class="label-con">
+								<a href="javacript:;" class="btn dib btn-border-gray">添加图片</a>
+							</div>
+						</div>
+						<div class="popForm-item">
+							<label>图片尺寸：</label>
+							<div class="label-con">
+								<span class="uploadImg-input">高<input class="inputText img-height" type="text" /></span>
+								<span class="uploadImg-input mr0">宽<input class="inputText img-width" type="text" /></span>
+							</div>
+						</div>
+						
+						<div class="popForm-item">
+							<label>图片描述：</label>
+							<div class="label-con">
+								<input class="inputText img-alt" type="text" />
+							</div>
+						</div>
+						<div class="imagesText-img">
+							<img class="img-pic" src="http://192.168.201.252:8020/%E8%87%AA%E5%8A%A9%E5%BB%BA%E7%AB%99%E7%A8%8B%E5%BA%8F/html/images/imgTxt_img02.png" alt="" />
+						</div>
+					</div>
+					<div class="editor-box">
+						<textarea name=""></textarea>
+					</div>
+				</div>
+			</div><!--pop-list-->
+		</div><!--popTabContent-->
+	</div><!--pop-body-->
+	<script>
+		$(function() {
+			selectCss();
+		});
+		
+		function selectCss () {
+			var imgCss = $('.images-css'),
+				img = imgCss.find('img');
+			var $uploadImg = $('.imagesText-uploadImg');
+			var $editorBox = $('.editor-box');
+				
+			img.on('click',function(){
+				var $this = $(this);
+				
+				$this.addClass('active').siblings().removeClass('active');
+				
+				if($this.attr('data-css') == 2 || $this.attr('data-css') == 1){
+					$uploadImg.addClass('hide');
+					$editorBox.removeAttr('style');
+				}else{
+					$uploadImg.removeClass('hide');
+					$editorBox.css({
+						'float':'left',
+						'width': '480px',
+						'margin-left':'13px'
+					})
+				}
+			});
+			
+			if (img.attr('data-css') == '1') {
+				$uploadImg.addClass('hide');
+			}
+			if (img.attr('data-css') == '2') {
+				$uploadImg.addClass('hide');
+			}
+			
+//			
+//			
+//			var $img = $('.images-css img'),
+//				$uploadImg = $('.imagesText-uploadImg'),
+//				$editorBox = $('.editor-box');
+//				
+//			$img.on('click', function() {
+//				var $this = $(this);
+//				
+//				$this.addClass('active').siblings().removeClass('active');
+//				
+//				if ($this.attr('data-css') == '0' || $this.attr('data-css') == '1') {
+//					contentHide();
+//				} else {
+//					$uploadImg.show();
+//					$editorBox.css({
+//						'float':'left',
+//						'width': '480px',
+//						'margin-left':'13px'
+//					})
+//				}
+//				function contentHide(){
+//					$uploadImg.hide();
+//					$editorBox.removeAttr('style');
+//				}
+//			});
+//			
+//			if ($img.attr('data-css') == '0') {
+//				$uploadImg.hide();
+//			}
+//			if ($img.attr('data-css') == '1') {
+//				$uploadImg.hide();
+//			}
+//			
+		}
+	</script>
+</div><!--imgTextPop-->

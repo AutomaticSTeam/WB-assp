@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.assp.modules.commondata.mapper.PictureAlbumMapper">
+	
+   <insert id="addAlbumAndGetprimaryKey" parameterType="com.assp.modules.commondata.entity.PictureAlbum"  >
+   	INSERT INTO wms_picture_album (
+		album_name,
+		album_desc,
+		operator_id,
+		operator_name,
+		site_id,
+		update_time,
+		create_time
+	)
+	VALUES
+		(
+			#{albumName},
+			#{albumDesc},
+			#{operatorId},
+			#{operatorName},
+			#{siteId},
+			NOW(),
+			NOW()
+		)
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="albumId">
+			SELECT LAST_INSERT_ID() AS albumId
+		</selectKey>
+	</insert>
+    
+	<update id="updataAlbunById" parameterType="com.assp.modules.commondata.entity.PictureAlbum" >
+		UPDATE wms_picture_album SET album_name=#{albumName}, album_desc=#{albumDesc}, operator_id=#{operatorId},operator_name=#{operatorName} WHERE album_id=#{albumId}
+	</update>
+	
+	<select id="queryPicByAlbumId"  resultType="com.assp.modules.commondata.entity.Picture"  parameterType="java.lang.Integer" >
+		SELECT
+			wms_picture.picture_id AS pictureId,
+			wms_picture.picture_name AS pictureName,
+			wms_picture.picture_url AS pictureUrl,
+			wms_picture.brief_desc AS briefDesc,
+			wms_picture.detail_desc AS detailDesc,
+			wms_picture.hyperlink AS hyperlink,
+			wms_picture.img_postfix AS imgPostfix
+		FROM
+			wms_picture
+		WHERE
+			wms_picture.picture_album_id = #{id}
+			AND
+			wms_picture.data_status = 0
+		ORDER BY
+		wms_picture.picture_order asc
+	</select>
+	<select id="queryReviewPicByAlbumId"  resultType="com.assp.modules.commondata.entity.Picture"  parameterType="java.lang.Integer" >
+		SELECT
+			wms_picture.picture_id AS pictureId,
+			wms_picture.picture_name AS pictureName,
+			wms_picture.picture_url AS pictureUrl,
+			wms_picture.brief_desc AS briefDesc,
+			wms_picture.detail_desc AS detailDesc,
+			wms_picture.hyperlink AS hyperlink,
+			wms_picture.img_postfix AS imgPostfix,
+			wms_picture.picture_order AS pictureOrder
+		FROM
+			wms_picture
+		WHERE
+			wms_picture.picture_album_id = #{id}
+			AND
+			wms_picture.data_status = 0
+			AND wms_picture.is_review = 1
+		ORDER BY
+		wms_picture.picture_order asc
+	</select>
+	
+	<select id="queryPicByAlbumIdToReview"  resultType="com.assp.modules.commondata.entity.Picture"  parameterType="java.lang.Integer" >
+		SELECT
+			wms_picture.picture_id AS pictureId,
+			wms_picture.picture_name AS pictureName,
+			wms_picture.picture_url AS pictureUrl,
+			wms_picture.brief_desc AS briefDesc,
+			wms_picture.detail_desc AS detailDesc,
+			wms_picture.img_postfix AS imgPostfix
+		FROM
+			wms_picture
+		WHERE
+			wms_picture.picture_album_id = #{id}
+			AND
+			wms_picture.data_status = 0
+			AND
+			wms_picture.is_review = 0
+		ORDER BY
+		wms_picture.picture_order asc
+	</select>
+	
+	<select id="queryAlbumAllAndReview"  resultType="com.assp.modules.commondata.entity.PictureAlbum"  >
+		SELECT
+			tmp.album_id AS albumId,
+			tmp.album_name AS albumName,
+			tmp.album_status AS albumStatus,
+			tmp.album_desc  AS albumDesc,
+			tmp.operator_id  AS operatorId,
+			tmp.operator_name AS operatorName,
+			COUNT(tmp.picture_id) AS review_is
+		FROM
+			(
+				SELECT
+					wpa.album_id,
+					wpa.album_name,
+					wpa.album_status,
+					wpa.album_desc,
+					wpa.operator_id,
+					wpa.operator_name,
+					wpa.create_time,
+					wp.picture_id
+				FROM
+					wms_picture_album AS wpa
+				LEFT JOIN wms_picture AS wp ON wpa.album_id = wp.picture_album_id AND wp.is_review=0
+			) AS tmp
+		
+		GROUP BY
+			tmp.album_id
+		ORDER BY 	tmp.create_time  DESC
+	</select>
+	
+	<resultMap id="pictureAlbumMap" type="com.assp.modules.commondata.entity.PictureAlbum">   
+        <id property="albumId" column="album_id" javaType="int" jdbcType="INTEGER" />  
+        <result property="albumName" column="album_name" javaType="string" jdbcType="VARCHAR"/>  
+        <result property="albumStatus" column="album_status" javaType="int" jdbcType="INTEGER"/>  
+        <result property="albumDesc" column="album_desc" javaType="string" jdbcType="VARCHAR"/>  
+        <result property="operatorId" column="operator_id" javaType="int" jdbcType="INTEGER"/>  
+        <result property="operatorName" column="operator_name" javaType="string" jdbcType="VARCHAR"/>  
+        <result property="review_is" column="review_is" javaType="int" jdbcType="INTEGER"/>  
+        
+     </resultMap> 
+	<resultMap id="pictureAlbumTypeMap" type="com.assp.modules.commondata.entity.PictureAlbum" extends="pictureAlbumMap">   
+         <collection property="pictureAlbumTypes" ofType="com.assp.modules.commondata.entity.PictureAlbumType">    
+            <id property="albumTypeId" column="album_type_id" javaType="int" jdbcType="INTEGER"/>    
+            <result property="albumTypeName" column="album_type_name" javaType="string" jdbcType="VARCHAR"/>    
+        </collection>    
+     </resultMap> 
+	
+	<select id="queryAlbumAllAndReviewInRelType"   resultMap="pictureAlbumTypeMap">
+		SELECT
+			wpa.album_id,
+			wpa.album_name ,
+			wpa.album_status,
+			wpa.album_desc ,
+			wpa.operator_id ,
+			wpa.operator_name,
+			(select count(1) from wms_picture where wms_picture.picture_album_id=wpa.album_id) AS review_is,
+      wpat.album_type_id ,
+			wpat.album_type_name 
+		FROM
+			wms_picture_album AS wpa 
+			left join wms_picture_album_rel_type wpart on wpa.album_id=wpart.album_id 
+			left join wms_picture_album_type as wpat on wpart.album_type_id=wpat.album_type_id
+		WHERE wpa.album_status=0
+			<if test="albumName != null">
+			       AND wpa.album_name  like  '%${albumName}%'
+			   </if>	
+			 <if test="albumTypeId != null">
+			       AND wpat.album_type_id = #{albumTypeId}
+			   </if>
+		ORDER BY 	wpa.create_time  DESC
+	</select>
+	
+	<select id="queryAlbumTypeByAlbumId"  resultType="com.assp.modules.commondata.entity.PictureAlbumType" parameterType="java.lang.Integer" >
+		SELECT
+			wms_picture_album_type.album_type_id AS albumTypeId,
+			wms_picture_album_type.album_type_pid AS albumTypePid,
+			wms_picture_album_type.album_type_name AS albumTypeName
+		FROM
+			wms_picture_album_type
+		INNER JOIN wms_picture_album_rel_type ON wms_picture_album_rel_type.album_type_id=wms_picture_album_type.album_type_id 
+				AND wms_picture_album_rel_type.album_id=#{id}	
+		WHERE wms_picture_album_type.album_status=0
+	</select>
+	
+	<select id="queryAllAlbumByTypeId"  resultType="com.assp.modules.commondata.entity.PictureAlbum" parameterType="java.lang.Integer" >
+		SELECT
+			wms_picture_album.album_id AS albumId,
+			wms_picture_album.album_name AS albumName,
+			wms_picture_album.album_status AS albumDesc
+		FROM
+			wms_picture_album
+		INNER JOIN wms_picture_album_rel_type ON wms_picture_album_rel_type.album_id=wms_picture_album.album_id 
+				AND wms_picture_album_rel_type.album_type_id=#{id}	
+		WHERE wms_picture_album.album_status=0
+		ORDER BY 
+			wms_picture_album.update_time DESC
+	</select>
+	
+	<select id="queryPicByPragrams"  resultType="com.assp.modules.commondata.entity.Picture"  parameterType="java.util.Map" >
+		SELECT
+			wms_picture.picture_id AS pictureId,
+			wms_picture.picture_name AS pictureName,
+			wms_picture.picture_url AS pictureUrl,
+			wms_picture.brief_desc AS briefDesc,
+			wms_picture.detail_desc AS detailDesc,
+			wms_picture.img_postfix AS imgPostfix,
+			wms_picture.hyperlink AS hyperlink
+		FROM
+			wms_picture
+		WHERE
+			wms_picture.picture_album_id = #{id}
+			AND
+			wms_picture.data_status = 0
+			AND
+			wms_picture.is_review = 1
+		ORDER BY
+		wms_picture.picture_order asc
+		LIMIT  #{limitNum}
+	</select>
+	
+	<update id="batchUpdatePictureAlbum" parameterType="com.assp.modules.commondata.entity.PictureAlbum">
+    
+    UPDATE wms_picture_album
+     <set> 
+       	<if test="albumName != null">
+           album_name = #{albumName} ,
+       </if>
+        <if test="albumStatus != null">
+           album_status = #{albumStatus} ,
+       </if>
+         <if test="albumDesc != null">
+           album_desc = #{albumDesc} ,
+       </if>
+         <if test="operatorId != null">
+           operator_id = #{operatorId} ,
+       </if>
+         <if test="operatorName != null ">
+           operator_name = #{operatorName} ,
+       </if>
+         <if test="updateTime != null ">
+           update_time = #{updateTime} ,
+       </if>
+         <if test="createTime != null ">
+           create_time = #{createTime} ,
+       </if>
+      	<if test="siteId != null">
+           site_id = #{siteId} ,
+       </if>
+       	<if test="isTop != null">
+           is_top = #{isTop} ,
+       </if>
+		</set>
+	WHERE
+		   <if test="albumId != null">
+		           album_id =  #{albumId}
+			</if>
+		  <if test="albumIds != null">
+			        album_id  in
+		            <foreach item="item" index="index" collection="albumIds" 
+		                         open="(" separator="," close=")">
+		                        #{item}
+		             </foreach>
+			   </if>
+		
+    </update>
+</mapper>
+
+
+
+

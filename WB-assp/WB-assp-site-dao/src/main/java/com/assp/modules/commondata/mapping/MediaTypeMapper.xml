@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.commondata.mapper.MediaTypeMapper">
+
+    <!-- 通过条件查找对应的文章列表 -->
+    <select id="selectMediaTypeByMediaId" resultType="com.assp.modules.commondata.entity.MediaType" parameterType="java.lang.Integer">
+            SELECT DISTINCT
+			     mt.media_type_id as mediaTypeId ,
+		         mt.media_type_name as mediaTypeName ,
+		         mt.data_status as  dataStatus
+		  FROM wms_media_rel_type as mrt
+	      LEFT JOIN wms_media_type mt
+	      ON mrt.media_type_id = mt.media_type_id
+		  WHERE mt.data_status = 0 
+	      AND mrt.media_id  = #{mediaId}
+    </select>
+    
+</mapper>

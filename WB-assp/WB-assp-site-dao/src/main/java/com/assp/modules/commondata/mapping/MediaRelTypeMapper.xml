@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.commondata.mapper.MediaRelTypeMapper">
+
+    <!-- 通过条件查找视频管理类型 -->
+    <select id="selectMediaRelTypeByCdt" resultType="com.assp.modules.commondata.entity.MediaRelType" parameterType="com.assp.modules.commondata.entity.MediaRelType">
+            SELECT DISTINCT
+	           mrt.media_rel_type_id as mediaRelTypeId ,
+	           mrt.media_id as mediaId,
+			   mt.media_type_id as mediaTypeId ,
+		       mt.media_type_name as mediaTypeName 
+		  FROM wms_media_rel_type as mrt
+	      LEFT JOIN wms_media_type mt
+	      ON mrt.media_type_id = mt.media_type_id
+		  WHERE 
+		  <if test="mediaId != null">
+		         mrt.media_id  = #{mediaId}
+		  </if>
+		   <if test="mediaTypeId != null">
+		         mrt.media_type_id  = #{mediaTypeId}
+		  </if>
+    </select>
+    <!-- 批量删除 -->
+    <delete id="bathDelByMediaIds" parameterType="List">  
+   	 delete from wms_media_rel_type WHERE media_id IN  
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+        #{item}   
+    </foreach>  
+	</delete>
+</mapper>

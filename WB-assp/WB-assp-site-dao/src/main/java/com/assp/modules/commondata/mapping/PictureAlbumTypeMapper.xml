@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.assp.modules.commondata.mapper.PictureAlbumTypeMapper" >
+  
+  <select id="queryChildrenByPid"  resultType="com.assp.modules.commondata.entity.PictureAlbumType"  parameterType="java.lang.Integer" >
+		SELECT
+			wms_picture_album_type.album_type_id AS albumTypeId,
+			wms_picture_album_type.album_type_pid AS albumTypePid,
+			wms_picture_album_type.album_type_name AS albumTypeName
+		FROM
+			wms_picture_album_type
+		WHERE
+			wms_picture_album_type.album_type_pid = #{id}
+	</select>
+	
+	<select id="queryOnePicture"  resultType="com.assp.modules.commondata.entity.Picture"  parameterType="com.assp.modules.commondata.entity.PictureAlbumType" >
+		SELECT
+			wp.picture_id AS pictureId,
+			wpa.album_name AS pictureName,
+			wp.picture_url AS pictureUrl,
+			wp.brief_desc AS briefDesc,
+			wp.detail_desc AS detailDesc,
+			wp.hyperlink AS hyperlink,
+			wp.img_postfix AS imgPostfix
+		FROM
+			wms_picture_album AS wpa
+		INNER JOIN wms_picture_album_rel_type  AS wpart ON wpart.album_id = wpa.album_id
+		AND wpart.album_type_id =${albumTypeId}
+		AND wpa.album_status = 0
+		LEFT JOIN wms_picture AS wp ON wpa.album_id=wp.picture_album_id  AND 	wp.is_review=1
+		GROUP BY wpa.album_id
+		ORDER BY wpa.update_time DESC
+	</select>
+</mapper>

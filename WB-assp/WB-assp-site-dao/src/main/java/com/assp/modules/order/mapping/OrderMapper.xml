@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.order.mapper.OrderMapper">
+	<insert id="insertOrder" useGeneratedKeys="true" keyProperty="orderId" parameterType="com.assp.modules.order.entity.Order">
+		insert into  
+		wms_order
+		(order_no,user_name,user_phone,user_address,user_domain_name,order_status,order_price,user_account,rented_time,rented_unit,province,city,area,is_delete,create_time)
+		values
+		(#{orderNo},#{userName},#{userPhone},#{userAddress},#{userDomainName},#{orderStatus},#{orderPrice},#{userAccount},#{rentedTime},#{rentedUnit},#{province},#{city},#{area},0,#{createTime})
+	</insert>
+	
+	<select id="selectOrderByParam" parameterType="com.assp.modules.order.entity.OrderVo" resultType="com.assp.modules.order.entity.OrderVo">
+		SELECT
+			worder.order_id as orderId,
+			worder.order_no as orderNo,
+			worder.user_name as userName,
+			worder.user_phone as userPhone,
+			worder.user_address as userAddress,
+			worder.user_domain_name as userDomainName,
+			worder.order_status as orderStatus,
+			worder.order_price as orderPrice,
+			worder.user_account as userAccount,
+			worder.rented_time as rentedTime,
+			worder.rented_unit as rentedUnit,
+			worder.is_delete as isDelete,
+			worder.create_time as createTime,
+			worder.province,
+			worder.city,
+			worder.area,
+			wop.dk_info as dkInfo,
+			wop.dk_operators dkOperators,
+			wop.dk_type as dkType,
+			wop.space_size as spaceSize,
+			wop.is_use as isUse,
+			wop.check_time as checkTime,
+			wtmpl.template_id as templateId,
+			wtmpl.template_name as templateName,
+			wtmpl.template_thumbnail_url as templdateThumbnailUrl
+		FROM
+			wms_order worder
+		LEFT JOIN wms_order_product wop ON worder.order_id = wop.order_id,
+		 wms_template wtmpl
+		WHERE
+			1 = 1
+		AND worder.user_account = #{userAccount}
+		AND wop.tmpl_id = wtmpl.template_id
+		<if test="orderId != null ">
+			AND worder.order_id = #{orderId}
+		</if>
+	</select>
+</mapper>

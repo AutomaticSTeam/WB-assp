@@ -1,0 +1,103 @@
+.own_me {
+	line-height: 2rem;
+	background: #00aeff;
+	text-align: center;
+	font-size: 0.875rem;
+	font-family: "Î¢ÈíÑÅºÚ", "ºÚÌå";
+	color: #fff;
+}
+.fast_doc {
+	text-align: right;
+	font-family: "Î¢ÈíÑÅºÚ", "ºÚÌå";
+	font-size: 0.875rem;
+	position: relative;
+}
+.fast_box {
+	background: #fff;
+	margin: 0rem;
+	padding: 0rem;
+	max-height: 400px;
+	overflow: auto;
+}
+.fast_box ul {
+	margin: 0rem;
+	padding: 0rem;
+}
+.fast_box ul li {
+	padding: 0.8rem 0.5rem 1rem 0.5rem;
+	border-bottom: 0.0625rem solid #c5c5c5;
+}
+.fast_box ul li .left_pic {
+	width: 4rem;
+	height: 4rem;
+	float: left;
+	padding-top: 0.2rem;
+}
+.fast_box ul li .left_pic img {
+	width: 6rem;
+	height: 4rem;
+}
+.fast_box ul li .right_in {
+	margin-left: 7.5rem;
+	line-height: 1.3rem;
+	text-align: left;
+	font-family: "Î¢ÈíÑÅºÚ", "ºÚÌå";
+	font-size: 0.875rem;
+	position: relative;
+}
+.fast_box ul li .right_in b {
+	font-size: 1rem;
+	font-weight: bold;
+	line-height: 1.7rem;
+	padding-right: 1.5rem;
+	position: relative;
+	margin-bottom: 0.5rem;
+}
+.fast_box ul li .right_in b .i_img {
+	width: 1rem;
+	position: absolute;
+	right: 0rem;
+	top: -0.3rem;
+}
+.fast_box ul li .right_in a:hover{
+	color:#0089E0;
+}
+.fast_box ul li .right_in .btn_green {
+	position: absolute;
+	right: 1rem;
+	top: 1.5rem;
+	width: 5rem;
+	line-height: 1.5rem;
+	height: 1.8rem;
+	text-align: center;
+	-moz-border-radius: 0.3rem;
+	-ms-border-radius: 0.3rem;
+	-o-border-radius: 0.3rem;
+	-webkit-border-radius: 0.3rem;
+	background: #00aeff;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	color: #fff;
+}
+.fast_box ul li .right_in .btn_gray {
+	position: absolute;
+	right: 0rem;
+	top: 1.5rem;
+	width: 5rem;
+	line-height: 1.5rem;
+	height: 1.8rem;
+	text-align: center;
+	-moz-border-radius: 0.3rem;
+	-ms-border-radius: 0.3rem;
+	-o-border-radius: 0.3rem;
+	-webkit-border-radius: 0.3rem;
+	background: #757575;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	color: #fff;
+}
+.cb {
+	clear: both;
+}

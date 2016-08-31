@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.frame.mapper.FrameMapper">
+	 <!-- 根据模板id获取栏目列表 -->
+    <select id="queryFrameByColumnsId" resultType="com.assp.modules.frame.entity.Frame" parameterType="java.lang.Integer">
+         SELECT f.frame_id as frameId,
+         f.frame_name as frameName,
+         f.frame_attachment_img as frameAttachmentImg,
+         f.frame_desc as frameDesc,
+         f.create_time as createTime,
+         f.update_time as updateTime,
+         f.operator_id as operatorId,
+         f.operator_name as operatorName,
+         f.data_status as dataStatus from wms_frame as f 
+			INNER JOIN wms_template_columns_rel_frame as tcrf on f.frame_id = tcrf.frame_id 
+			WHERE
+			f.data_status = 0 
+			AND tcrf.rel_status = 0
+			AND tcrf.columns_id = #{value}
+			order by tcrf.sort_num
+    </select>
+</mapper>

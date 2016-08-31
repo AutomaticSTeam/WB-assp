@@ -1,0 +1,21 @@
+<!--http://www.cxy808.com
+  ~ under the License.
+  -->
+<ehcache>
+    <diskStore path="java.io.tmpdir/com-assp-olcs"/>
+    <defaultCache
+        maxElementsInMemory="1000"
+        eternal="false"
+        timeToLiveSeconds="600"
+        overflowToDisk="true"
+        diskPersistent="false"
+        />
+    <!--=================================================================
+        Hibernate Object Caches
+        =================================================================-->
+    <cache name="com.assp.modules.sys.entity.User"
+        maxElementsInMemory="100"
+        timeToLiveSeconds="0"
+        overflowToDisk="true"/>
+
+</ehcache>

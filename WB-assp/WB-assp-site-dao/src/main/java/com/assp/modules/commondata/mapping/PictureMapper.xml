@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.assp.modules.commondata.mapper.PictureMapper">
+	
+   <insert id="insertPicture" parameterType="com.assp.modules.commondata.entity.Picture"  >
+    INSERT INTO wms_picture
+      (
+		picture_name,
+		picture_url,
+		brief_desc,
+		detail_desc,
+		picture_album_id,
+		img_postfix,
+		picture_type,
+		img_size,
+		banner_format_width,
+		banner_format_height,
+		useage,
+		operator_id,
+		operator_name,
+		create_time,
+		update_time,
+		data_status,
+		picture_order
+
+      )
+    VALUES
+    (
+        #{pictureName },
+        #{pictureUrl },
+        #{briefDesc},
+        #{detailDesc},
+        #{pictureAlbumId},
+        #{imgPostfix},
+        #{pictureType},
+        #{imgSize},
+        #{bannerFormatWidth},
+        #{bannerFormatHeight},
+        #{useage},
+        #{operatorId},
+        #{operatorName},
+        NOW(),
+        NOW(),
+        #{dataStatus},
+        #{pictureOrder}
+       
+    )
+	<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="pictureId">
+		SELECT LAST_INSERT_ID() AS pictureId
+	</selectKey>
+</insert>
+    
+    <select id="getPictureById" parameterType="java.lang.Integer" resultType="com.assp.modules.commondata.entity.Picture">
+		SELECT
+			picture_id as pictureId,
+			picture_name as pictureName,
+			picture_url as pictureUrl,
+			img_postfix as imgPostfix,
+			update_time  as updateTime,
+			picture_order as pictureOrder
+		FROM
+			wms_picture
+		WHERE
+			data_status = 0 
+			AND
+			picture_id = #{id}
+	</select>
+	
+	<update id="updatePictureStatus" parameterType="com.assp.modules.commondata.entity.Picture" >
+		UPDATE wms_picture SET data_status = 1 WHERE picture_id = #{pictureId}
+	</update>
+	
+	<update id="updatePictureforDelete" parameterType="java.lang.Integer" >
+		UPDATE wms_picture SET data_status = 1,picture_album_id = null WHERE picture_album_id = #{id}
+	</update>
+	
+	<update id="updatePictureResult" parameterType="com.assp.modules.commondata.entity.Picture" >
+		UPDATE wms_picture
+		SET 
+			 picture_name = #{pictureName},
+			 brief_desc = #{briefDesc},
+			 detail_desc = #{detailDesc},
+			 picture_album_id = #{pictureAlbumId},
+			 operator_id=#{operatorId},
+			 operator_name=#{operatorName},
+			 picture_order=#{pictureOrder},
+			 picture_type=#{pictureType},
+			 hyperlink=#{hyperlink},
+			 is_review=#{isReview},
+			 site_id=#{siteId},
+			 update_time=NOW()
+		WHERE
+	   		 picture_id = #{pictureId}
+	</update>
+	
+	<update id="review_yesById" parameterType="java.lang.Integer" >
+		UPDATE wms_picture SET is_review = 1 WHERE picture_id = #{id}
+	</update>
+	
+	<select id="queryAlbumByPId" parameterType="java.lang.Integer" resultType="com.assp.modules.commondata.entity.PictureAlbum">
+		SELECT 
+			wpa.album_id AS albumId,
+			wpa.album_name AS albumName,
+			wpa.album_desc AS albumDesc,
+			wpa.operator_name AS operatorName,
+			wpa.create_time AS createTime
+		FROM 
+			wms_picture_album AS wpa
+		JOIN wms_picture AS wp ON wp.picture_album_id=wpa.album_id 
+		WHERE	wp.picture_id= #{id} 
+				AND 
+				wpa.album_status=0
+
+	</select>
+	
+	<insert id="batchAddPic" useGeneratedKeys="true" parameterType="java.util.List">  
+	    <selectKey resultType="long" keyProperty="id" order="AFTER">  
+	        SELECT  
+	        LAST_INSERT_ID()  
+	    </selectKey>  
+		    INSERT INTO wms_picture
+		      (
+				picture_name,
+				picture_url,
+				brief_desc,
+				detail_desc,
+				picture_album_id,
+				img_postfix,
+				picture_type,
+				img_size,
+				banner_format_width,
+				banner_format_height,
+				useage,
+				is_review,
+				operator_id,
+				operator_name,
+				create_time,
+				update_time,
+				data_status,
+				picture_order,
+				hyperlink,
+				site_id
+		
+		      )
+		    VALUES 
+	    <foreach collection="list" item="pic" index="index" separator="," >  
+	        ( 
+	        #{pic.pictureName },
+	        #{pic.pictureUrl },
+	        #{pic.briefDesc},
+	        #{pic.detailDesc},
+	        #{pic.pictureAlbumId},
+	        #{pic.imgPostfix},
+	        #{pic.pictureType},
+	        #{pic.imgSize},
+	        #{pic.bannerFormatWidth},
+	        #{pic.bannerFormatHeight},
+	        #{pic.useage},
+	        #{pic.isReview},
+	        #{pic.operatorId},
+	        #{pic.operatorName},
+	        NOW(),
+	        NOW(),
+	        #{pic.dataStatus},
+	        #{pic.pictureOrder},
+	        #{pic.hyperlink},
+	        #{pic.siteId}
+	        )  
+	    </foreach>  
+	</insert>
+
+	<update id="batchUpdataPic" useGeneratedKeys="true" parameterType="java.util.List">  
+	     <foreach collection="list" item="pic" index="index"  separator=";">
+				UPDATE wms_picture
+				<set>
+					 <if test="pic.pictureName !=null ">  
+				        picture_name=#{pic.pictureName},  
+				    </if>  
+					<if test="pic.briefDesc !=null ">  
+				        brief_desc=#{pic.briefDesc}, 
+				    </if> 
+				    <if test="pic.detailDesc !=null ">  
+				       detail_desc=#{pic.detailDesc},
+				    </if> 
+				    <if test="pic.useage !=null ">  
+				        useage=#{pic.useage}, 
+				    </if>
+				     <if test="pic.useage !=null ">  
+				        useage=#{pic.useage}, 
+				    </if>  
+				    <if test="pic.operatorId !=null ">  
+				       operator_id=#{pic.operatorId},
+				    </if> 
+				    <if test="pic.operatorName !=null ">  
+				        operator_name=#{pic.operatorName},
+				    </if> 
+				    <if test="pic.pictureOrder !=null ">  
+				        picture_order=#{pic.pictureOrder},
+				    </if>
+				    <if test="pic.dataStatus !=null ">  
+				        data_status=#{pic.dataStatus},
+				    </if>
+				    <if test="pic.hyperlink !=null ">  
+				        hyperlink=#{pic.hyperlink},
+				    </if>
+				    <if test="pic.isReview !=null ">  
+				        is_review=#{pic.isReview},
+				    </if>
+					update_time=NOW()
+				</set>
+				WHERE
+					picture_id = #{pic.pictureId}
+	   </foreach>  
+	</update>
+</mapper>
+
+
+
+

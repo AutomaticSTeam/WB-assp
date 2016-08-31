@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.commondata.mapper.MediaMapper">
+
+   <insert id="insertMedia" parameterType="com.assp.modules.commondata.entity.Media"  >
+    INSERT INTO wms_media
+      (
+		media_name,
+		media_author,
+		media_url,
+		media_size,
+		media_briefing,
+		media_summary,
+		media_source,
+		media_suffix,
+		media_usage,
+		media_attachment_img,
+		create_time,
+		update_time,
+		operator_id,
+		operator_name,
+		is_review,
+		is_top,
+		data_status
+      )
+    VALUES
+    (
+        #{mediaName },
+        #{mediaAuthor },
+        #{mediaUrl},
+        #{mediaSize},
+        #{mediaBriefing},
+        #{mediaSummary},
+        #{mediaSource},
+        #{mediaSuffix},
+        #{mediaUsage},
+        #{mediaAttachmentImg},
+        #{createTime},
+        #{updateTime},
+        #{operatorId},
+        #{operatorName},
+         #{isReview},
+        #{isTop},
+        #{dataStatus}
+    )
+	<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="mediaId">
+		SELECT LAST_INSERT_ID() AS mediaId
+	</selectKey>
+</insert>
+
+<!-- 通过条件查找视频 -->
+ <select id="selectMediasByCondition" resultType="com.assp.modules.commondata.entity.Media" parameterType="com.assp.modules.commondata.entity.Media">
+           SELECT DISTINCT
+					wm.media_id  AS mediaId,
+					wm.media_name AS mediaName ,
+					wm.media_url AS mediaUrl ,
+					wm.media_author AS mediaAuthor ,
+					wm.media_size AS mediaSize ,
+					wm.media_briefing AS mediaBriefing,
+					wm.media_summary AS mediaSummary ,
+					wm.media_source AS mediaSource ,
+					wm.media_suffix AS mediaSuffix ,
+					wm.media_usage AS mediaUsage ,
+					wm.media_attachment_img AS mediaAttachmentImg  ,
+					wm.create_time AS createTime ,
+					wm.update_time AS updateTime,
+					wm.operator_id AS operatorId ,
+					wm.operator_name AS operatorName,
+					is_review AS  isReview,
+					wm.is_top AS isTop,
+					wm.read_num AS readNum,
+					wm.data_status AS  dataStatus
+			FROM
+			wms_media AS wm
+			LEFT JOIN wms_media_rel_type  AS wmrt
+			ON wm.media_id = wmrt.media_id
+			WHERE wm.data_status = 0
+			   <if test="mediaName != null">
+			       AND wm.media_name   like  '%${mediaName}%'
+			   </if>
+			   <if test="mediaTypes != null">
+			        AND wmrt.media_type_id  in
+		            <foreach item="item" index="index" collection="mediaTypes" 
+		                         open="(" separator="," close=")">
+		                        #{item}
+		             </foreach>
+			   </if>
+			     <if test="mediaIds != null">
+			        AND   wm.media_id   in
+		            <foreach item="item" index="index" collection="mediaIds" 
+		                         open="(" separator="," close=")">
+		                        #{item}
+		             </foreach>
+			   </if>
+		ORDER BY wm.is_top DESC , is_review ASC ,update_time DESC
+			<if test="limitNum != null">
+ 					   limit     #{limitNum}
+ 		     </if>
+    </select>
+    
+    <update id="batchUpdateMedia" parameterType="com.assp.modules.commondata.entity.Media">
+    
+    UPDATE wms_media 
+     <set> 
+       <if test="mediaName != null">
+           media_name = #{mediaName} ,
+       </if>
+        <if test="mediaUrl != null">
+           media_url = #{mediaUrl} ,
+       </if>
+         <if test="mediaAuthor != null">
+           media_author = #{mediaAuthor} ,
+       </if>
+         <if test="mediaSource != null">
+           media_source = #{mediaSource} ,
+       </if>
+         <if test="operatorName != null ">
+           operator_name = #{operatorName} ,
+       </if>
+         <if test="isTop != null">
+           is_top = #{isTop} ,
+       </if>
+       <if test="isReview != null">
+           is_review = #{isReview} ,
+       </if>
+         <if test="createTime != null ">
+           create_time = #{createTime} ,
+       </if>
+       	 <if test="updateTime != null ">
+           update_time = #{updateTime} ,
+       </if>
+         <if test="dataStatus != null">
+           data_status = #{dataStatus} ,
+       </if>
+		</set>
+	WHERE
+		   <if test="mediaId != null">
+		           media_id =  #{mediaId}
+			</if>
+		  <if test="mediaIds != null">
+			        media_id  in
+		            <foreach item="item" index="index" collection="mediaIds" 
+		                         open="(" separator="," close=")">
+		                        #{item}
+		             </foreach>
+			   </if>
+		
+    </update>
+
+    <update id="updateMediaReadNum" parameterType="java.lang.Integer">
+    UPDATE wms_media SET read_num=#{readNum} WHERE media_id=#{mediaId}
+    </update>
+</mapper>

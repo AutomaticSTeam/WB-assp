@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.template.mapper.TemplateCommonRelFrameMapper">
+    
+     <insert id="insertGetprimaryKey" parameterType="com.assp.modules.template.entity.TemplateCommonRelFrame"  >
+   	INSERT INTO wms_template_common_rel_frame (
+		frame_id,
+		template_id,
+		common_relFrame_pid,
+		sort_num,
+		common_type,
+		common_type_item,
+		common_iframe_name,
+		css_class,
+		rel_status
+	)
+	VALUES
+		(
+			#{frameId},
+			#{templateId},
+			#{commonRelFramePid},
+			#{sortNum},
+			#{commonType},
+			#{commonTypeItem},
+			#{commonIframeName},
+			#{cssClass},
+			#{relStatus}
+		)
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="commonRelFrameId">
+			SELECT LAST_INSERT_ID() AS commonRelFrameId
+		</selectKey>
+	</insert>
+    
+</mapper>

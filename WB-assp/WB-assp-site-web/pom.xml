@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>WB-assp</groupId>
+    <artifactId>WB-assp</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>WB-assp-site-web</artifactId>
+  <packaging>war</packaging>
+   <dependencies>
+     <dependency>
+		<groupId>WB-assp</groupId>
+		<artifactId>WB-assp-common</artifactId>
+	</dependency>
+     <dependency>
+		<groupId>WB-assp</groupId>
+		<artifactId>WB-assp-site-service</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.tuckey</groupId>
+	    <artifactId>urlrewritefilter</artifactId>
+	    <version>4.0.3</version>
+	</dependency>
+  </dependencies>
+  <build>
+    <finalName>WB-assp-site-web</finalName>
+    <resources>
+		<resource>
+			<directory>src/main/java</directory>
+			<includes>
+				<include>**/*.properties</include>
+				<include>**/*.xml</include>
+			</includes>
+		</resource>
+		<resource>
+			<directory>src/main/resources</directory>
+			<includes>
+				<include>**/*.properties</include>
+				<include>**/*.xml</include>
+			</includes>
+		</resource>
+	</resources>
+    <plugins>
+		<!-- Maven项目编译时 织入切面 CTW -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.7</version>
+				<configuration>
+					<verbose>true</verbose>
+					<privateScope>true</privateScope>
+					<showWeaveInfo>true</showWeaveInfo>
+					<source>1.7</source>
+					<target>1.7</target>
+					<complianceLevel>1.7</complianceLevel>            
+					<encoding>UTF-8</encoding>
+					<verbose>false</verbose>
+					<outxml>true</outxml>
+					<aspectLibraries>            
+						<!-- 此处定义外部的aspect包，例如spring的事务aspect包 。这里引用的包必须在依赖中声明 目前先不引入spring-aspects外部包  -->          
+						<!-- <aspectLibrary> 
+								<groupId>org.springframework</groupId> 
+								<artifactId>spring-aspects</artifactId> 
+						</aspectLibrary> -->
+					</aspectLibraries>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<!-- use this goal to weave all your main classes -->
+							<!-- <goal>test-compile</goal> -->
+						</goals>
+					</execution>
+				</executions>     
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			
+			<plugin>       
+				<groupId>org.apache.maven.plugins</groupId>       
+				<artifactId>maven-eclipse-plugin</artifactId>       
+				<version>2.6</version>       
+				<configuration>          
+				<ajdtVersion>1.6.11</ajdtVersion>       
+				</configuration>     
+			</plugin> 
+		</plugins>
+  </build>
+</project>

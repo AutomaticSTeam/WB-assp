@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.sys.mapper.PermissionMapper">
+
+    
+    <!--通过条件查找权限资源 -->
+    <select id="selectPermissionsByVo" resultType="com.assp.modules.sys.entity.Permission" parameterType="com.assp.modules.sys.entity.PermissionVo">
+	       SELECT
+				sp.permission_id AS permissionId,
+				sp.permission_code AS permissionCode,
+				sp.permission_name AS permissionName,
+				sp.permission_pid AS permissionPid,
+				sp.permission_url AS permissionUrl ,
+				sp.permission_desc AS permissionDesc,
+				sp.create_time AS createTime,
+				sp.update_time AS updateTime,
+				sp.operator_id AS operatorId,
+				sp.operator_name AS operatorName,
+				sp.permission_status AS permissionStatus ,
+				sp.permission_delete_flag AS permissionDeleteFlag,
+				sp.remark  AS remark
+			FROM
+				sys_permission AS sp
+			JOIN sys_role_rel_permission AS srlp ON sp.permission_id = srlp.permission_id
+			WHERE
+			     sp.permission_status = 0 
+			       <if test="roleIds != null">
+			        AND srlp.role_id  in
+		            <foreach item="item" index="index" collection="roleIds" 
+		                         open="(" separator="," close=")">
+		                        #{item}
+		             </foreach>
+			   </if>
+    </select>
+    
+    
+</mapper>

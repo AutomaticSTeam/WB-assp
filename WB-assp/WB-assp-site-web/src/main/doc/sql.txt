@@ -1,0 +1,78 @@
+----------------------------wzp-----------------------20160704--------
+alter table wms_template_logo add  `logo_img_hide` int(11) DEFAULT NULL COMMENT '是否隐藏logo,1为隐藏';
+alter table wms_template_logo add  `logo_img_hot_line` varchar(100) DEFAULT NULL COMMENT 'logo链接',
+-------------------------------end------------------------------------------------------------
+----------------------------wzp-----------------------20160708--------
+alter table wms_template_rel_columns add  `columns_hide` int(2) DEFAULT NULL COMMENT '是否可见，默认可见，1为隐藏';
+----------------------------------------end---------------------------------------------
+----------------------------wzp-----------------------20160711--------
+alter table wms_template_columns add  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
+alter table wms_template_footer_rel_columns add  `columns_hide` int(2) DEFAULT NULL COMMENT '是否可见，默认可见，1为隐藏';
+----------------------------------------end---------------------------------------------
+----------------------------wzp-----------------------20160715--------
+alter table wms_picture modify column picture_name varchar(50) DEFAULT NULL COMMENT '图片名称';
+----------------------------------------end---------------------------------------------
+----------------------------wzp-----------------------20160718--------
+CREATE TABLE `wms_template_common_rel_frame` (
+  `common_rel_frame_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '模板导航项关联框架',
+  `common_rel_frame_pid` int(11) DEFAULT '0' COMMENT '父级id  0 顶级模块',
+  `template_id` int(11) NOT NULL,
+  `frame_id` int(11) DEFAULT NULL COMMENT '框架id',
+  `sort_num` int(3) DEFAULT NULL COMMENT '排序',
+  `rel_status` int(2) DEFAULT '0' COMMENT '关联关系是否有效 0 有效 1 失效',
+  PRIMARY KEY (`common_rel_frame_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='模板默认关联框架表';
+
+alter table wms_template_frame_rel_module ADD  `common_rel_frame_id` int(11) DEFAULT NULL COMMENT '公用框架组id';
+alter table wms_template_columns_rel_frame  ADD   `css_class` varchar(50) DEFAULT NULL COMMENT 'frame框架样式字段';
+alter table wms_template_common_rel_frame  ADD   `css_class` varchar(50) DEFAULT NULL COMMENT 'frame框架样式字段';
+alter table wms_template_frame_rel_module  ADD   `css_class` varchar(50) DEFAULT NULL COMMENT 'frame框架样式字段';
+alter table wms_template_module add `page_show` int(11) DEFAULT NULL COMMENT '是否显示分页';
+alter table wms_template_module add  `page_size` int(11) DEFAULT '10' COMMENT '显示多少行';
+alter table wms_template_module add  `module_style_type` int(11) DEFAULT NULL COMMENT '模板组合板式，1-tab，2-竖列';
+----------------------------------------end---------------------------------------------
+----------------------------wzp-----------------------20160720--------
+alter table wms_template_common_rel_frame add  `common_type` int(11) DEFAULT NULL COMMENT '预置类型，0为普遍加载，1-模块儿加载';
+alter table wms_template_common_rel_frame add  `common_type_item` int(11) DEFAULT NULL COMMENT '每预置类型中的不同种类';
+alter table wms_template_common_rel_frame add   `common_iframe_name` varchar(50) DEFAULT NULL COMMENT '框架名称';
+-----------------------------end---------------------------------
+-------------------------------wzp-----------------------20160725-----------
+CREATE TABLE `wms_content_data_type` (
+  `data_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `data_type_code` varchar(10) DEFAULT NULL COMMENT '类型编码',
+  `data_type_parent_code` varchar(10) DEFAULT NULL,
+  `data_type_name` varchar(50) DEFAULT NULL COMMENT '类型名称',
+  `data_type_level` int(11) DEFAULT NULL COMMENT '类型层级',
+  `sort_num` int(11) DEFAULT NULL COMMENT '排序',
+  `data_status` int(11) DEFAULT NULL COMMENT '是否在用，1为不在用',
+  PRIMARY KEY (`data_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据类型';
+---------------------------------end--------------------------------------------
+-------------------------------wzp-----------------------20160726-----------
+alter table wms_template_module ADD `model_tyle_height` varchar(10) DEFAULT NULL COMMENT '高';
+alter table wms_template_module ADD `model_tyle_width` varchar(10) DEFAULT NULL COMMENT '宽';
+alter table wms_template_logo ADD `img_height` varchar(10) DEFAULT NULL COMMENT '高';
+alter table wms_template_logo ADD `img_width` varchar(10) DEFAULT NULL COMMENT '宽';
+---------------------------------end--------------------------------------------
+-------------------------------wk-----------------------20160726-----------
+alter table wms_picture_album ADD   `update_time` datetime DEFAULT NULL COMMENT '修改时间';
+alter table wms_template_module ADD  `is_top` int(2) DEFAULT '0' COMMENT '是否置顶 1置顶 0未置顶';
+---------------------------------end--------------------------------------------
+-------------------------------wzp-----------------------20160729-----------
+CREATE TABLE `wms_content_data_type` (
+  `data_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `data_type_pid` int(10) DEFAULT NULL COMMENT '父类型id',
+  `data_type_name` varchar(50) DEFAULT NULL COMMENT '类型名称',
+  `data_type_level` int(11) DEFAULT NULL COMMENT '类型层级',
+  `sort_num` int(11) DEFAULT NULL COMMENT '排序',
+  `data_status` int(11) DEFAULT NULL COMMENT '是否在用，1为不在用',
+  PRIMARY KEY (`data_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='资源分类';
+INSERT INTO `wms_content_data_type` (data_type_pid,data_type_name,data_type_level,sort_num,data_status) VALUES 
+(0,'文章分类',1,NULL,0),(1,'文章',2,NULL,0),(0,'图书分类',1,NULL,0),(3,'图书',2,NULL,0),(0,'图册分类',1,NULL,0),(5,'图册',2,NULL,0),
+(6,'图片',3,NULL,0),(0,'视频分类',1,NULL,0),(8,'视频',2,NULL,0),(0,'logo',1,NULL,0),(0,'导航',1,NULL,0),
+(0,'页脚',1,NULL,0),(0,'添加模块',1,NULL,0),(0,'空模块',1,NULL,0);
+alter table wms_template_module add `module_style_show` varchar(10) DEFAULT NULL COMMENT '该模块儿自身展示形式，01-轮播图';
+alter table wms_template_module change module_tyle_height module_style_height varchar(10) DEFAULT NULL COMMENT '高';
+alter table wms_template_module change module_tyle_width module_style_width varchar(10) DEFAULT NULL COMMENT '宽';
+---------------------------------end--------------------------------------------

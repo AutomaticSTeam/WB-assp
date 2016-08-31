@@ -1,0 +1,44 @@
+#startUpload{
+	display: none;
+}
+#filelist{
+	margin-left: 77px;
+}
+#canselUpload{
+	display: none;
+}
+
+.progress-bar {
+	appearance: none;
+	border: none;
+	width: 100%; height: 20px;
+	background-color: whiteSmoke;
+	border-radius: 3px;
+	box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+	color: royalblue;
+	position: relative;
+	margin: 0 0 1.5em; 
+}
+
+
+.progress-bar {
+	background-color: whiteSmoke;
+	border-radius: 3px;
+	box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+	width: 100%; height:20px;
+}
+
+.progress-bar span {
+	background-color: royalblue;
+	border-radius: 3px;
+
+	display: block;
+	text-indent: -9999px;
+}
+
+p[data-value]:after {
+    content: attr(data-value) '%';
+    position: absolute;
+    right: 0;
+}
+

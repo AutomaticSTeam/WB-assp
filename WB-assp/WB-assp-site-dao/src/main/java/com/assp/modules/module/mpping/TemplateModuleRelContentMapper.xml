@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assp.modules.module.mapper.TemplateModuleRelContentMapper">
+<insert id="insertList" useGeneratedKeys="true" parameterType="java.util.List">  
+    <selectKey resultType="Integer" keyProperty="id" order="AFTER">  
+        SELECT  
+        LAST_INSERT_ID()  
+    </selectKey>  
+	    INSERT INTO wms_template_module_rel_content
+	      (
+			module_id,
+			content_data_type,
+			data_target_table,
+			data_column_id,
+			sort_num,
+			rel_status,
+			site_id
+	      )
+	    VALUES 
+    <foreach collection="list" item="mrc" index="index" separator="," >  
+        ( 
+        #{mrc.moduleId },
+        #{mrc.contentDataType },
+        #{mrc.dataTargetTable },
+        #{mrc.dataColumnId },
+        #{mrc.sortNum },
+        #{mrc.relStatus },
+        #{mrc.siteId }
+        )  
+    </foreach>  
+</insert>
+   
+</mapper>
