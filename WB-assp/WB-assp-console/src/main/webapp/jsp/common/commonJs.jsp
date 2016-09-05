@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <% String rootPath = request.getContextPath();%>
-<<script type="text/javascript">
+<script type="text/javascript">
 <!--
        var rootPath = '<%=rootPath%>';
 //-->

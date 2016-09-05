@@ -53,7 +53,7 @@ document.onkeypress=banBackSpace;
 document.onkeydown=banBackSpace; 
 </script>
 </head>
-<frameset rows="130,*,70" cols="*" frameborder="no" border="0" framespacing="0" >
+<frameset rows="150,*,70" cols="*" frameborder="no" border="0" framespacing="0" >
   <frame src="<%=rootPath %>/jsp/common/head.jsp" name="mainFrame_top" id="mainFrame_top" title="mainFrame_top" noresize="noresize"/>
   <frame src="<%=rootPath %>/jsp/common/welcome.jsp" name="mainFrame_center" id="mainFrame_center" title="mainFrame_center" noresize="noresize" />
   <%-- <frame src="<%=rootPath %>/jsp/common/footer.jsp" name="mainFrame_footer" id="mainFrame_footer" title="mainFrame_footer" noresize="noresize" /> --%>
