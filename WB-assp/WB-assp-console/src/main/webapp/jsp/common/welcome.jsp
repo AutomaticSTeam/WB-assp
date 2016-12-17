@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body id="login">
         <div id="content">
-               <h3 align="center">欢迎进入WMS管理平台</h3>
+               <h3 align="center">欢迎进入易站管理平台</h3>
               <p align="center">
                    <img src="<%=path %>images/welcome.jpg" alt="" style="width:auto;height: 360px;"/>
               </p>

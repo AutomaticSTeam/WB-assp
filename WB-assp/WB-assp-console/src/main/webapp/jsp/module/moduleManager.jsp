@@ -34,12 +34,6 @@
 			<iframe name="module_center" id="module_center" title="module_center" seamless noresize="noresize" style="display: block;height:100%;"></iframe>
 	</div>
 </div>
-<!-- content begin -->
-    
-			
-<!-- content end -->
-
-<%--  <jsp:include page="/jsp/common/footer.jsp" /> --%>
 </body>
 <script type="text/javascript">
 $(function(){

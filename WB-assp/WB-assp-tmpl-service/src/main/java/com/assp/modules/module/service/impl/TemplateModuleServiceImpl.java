@@ -536,5 +536,40 @@ public class TemplateModuleServiceImpl  implements ITemplateModuleService{
 		return templateModuleMapper.addModuleReturnId( module);
 	}
 
+	@Override
+	public void addModuleForParentModule(TemplateModule tempTemplateModule) {
+		
+		// TODO Auto-generated method stub
+		
+		switch(tempTemplateModule.getModuleType()){
+		case 1:
+			tempTemplateModule.setModuleStyleType(1);
+		case 2:
+			TemplateModule templateModule = new TemplateModule();
+			templateModule.setSiteId(tempTemplateModule.getSiteId());
+			templateModule.setModulePid(tempTemplateModule.getModuleId());
+			templateModule.setDataStatus(0);
+			templateModule.setModuleType(0);
+			templateModule.setModuleName("模块名称");
+			templateModule.setShowTitile(1);
+			templateModule.setPageSize(20);
+			templateModule.setModuleItemLineNum(3);
+			templateModule.setModuleItemColumnNum(3);
+			// 模块添加模板
+			templateModule.setModuleTmpl("module_add_tmpl");
+			templateModuleMapper.addModuleReturnId(templateModule);
+			// 保存内容
+			TemplateModuleRelContent templateModuleRelContent = new TemplateModuleRelContent();
+			// 13为添加模块模板，待录入
+			templateModuleRelContent.setContentDataType(13);
+			templateModuleRelContent.setSiteId(tempTemplateModule.getSiteId());
+			templateModuleRelContent.setModuleId(templateModule.getModuleId());
+			templateModuleRelContent.setRelStatus(0);
+			templateModuleRelContentMapper.insert(templateModuleRelContent);
+		}
+		templateModuleMapper.updateByPrimaryKeySelective(tempTemplateModule);
+		
+	}
+
 }
   

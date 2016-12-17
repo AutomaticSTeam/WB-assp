@@ -6,7 +6,7 @@ String rootPath = request.getContextPath();
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>客服管理系统</title>
+<title>易站-世界上最好用的建站系统</title>
 <jsp:include page="/jsp/common/commonCssLink.jsp" />
 <style type="text/css">
 #mainFrame_center scrollbar{visibility:collapse !important;}

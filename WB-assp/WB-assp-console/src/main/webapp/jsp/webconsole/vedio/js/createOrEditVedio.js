@@ -221,7 +221,7 @@ var selectDataColumnId = function(index){
 				if(index != null && index != "null" && index != ''){
 					$.ajax({
 			  			type:'post',
-			  			 url:rootPath+'/site/selectDateColumnId.do',
+			  			 url:rootPath+'/template/selectDateColumnId.do',
 			  			data:{
 			  				moduleId : index ,
 			  			},

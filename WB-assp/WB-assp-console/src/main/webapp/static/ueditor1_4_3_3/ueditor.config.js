@@ -33,74 +33,19 @@
         , serverUrl: URL + "jsp/controller.jsp"
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
-//        , toolbars: [[
-//            'fullscreen', 'source', '|', 'undo', 'redo', '|',
-//            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-//            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-//            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-//            'directionalityltr', 'directionalityrtl', 'indent', '|',
-//            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-//            'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-//            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
-//            'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
-//            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-//            'print', 'preview', 'searchreplace', 'drafts', 'help'
-//        ]]
-        ,	toolbars: [
-                   [
-                       'undo', //撤销
-                       'redo', //重做
-                       'bold', //加粗
-                       'indent', //首行缩进
-                       'italic', //斜体
-                       'underline', //下划线
-                       'strikethrough', //删除线
-                       'source', //源代码
-                       'preview', //预览
-                       'horizontal', //分隔线
-                       'removeformat', //清除格式
-                       'time', //时间
-                       'date', //日期
-                       'insertrow', //前插入行
-                       'insertcol', //前插入列
-                       'mergeright', //右合并单元格
-                       'mergedown', //下合并单元格
-                       'deleterow', //删除行
-                       'deletecol', //删除列
-                       'splittorows', //拆分成行
-                       'splittocols', //拆分成列
-                       'splittocells', //完全拆分单元格
-                       'deletecaption', //删除表格标题
-                       'cleardoc', //清空文档
-                       'fontfamily', //字体
-                       'fontsize', //字号
-                       'paragraph', //段落格式
-                       'simpleupload', //单图上传
-                       'insertimage', //多图上传
-                       'link', //超链接
-                       'emotion', //表情
-                       'spechars', //特殊字符
-                       'justifyleft', //居左对齐
-                       'justifyright', //居右对齐
-                       'justifycenter', //居中对齐
-                       'forecolor', //字体颜色
-                       'insertorderedlist', //有序列表
-                       'insertunorderedlist', //无序列表
-                       'directionalityltr', //从左向右输入
-                       'directionalityrtl', //从右向左输入
-                       'rowspacingtop', //段前距
-                       'rowspacingbottom', //段后距
-                       'imagenone', //默认
-                       'imageleft', //左浮动
-                       'imageright', //右浮动
-                       'attachment', //附件
-                       'imagecenter', //居中
-                       'lineheight', //行间距
-                       'edittip ', //编辑提示
-                       'inserttable', //插入表格
-                       'charts', // 图表
-                   ]
-               ]
+        , toolbars: [[
+            'fullscreen', 'source', '|', 'undo', 'redo', '|',
+            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+            'directionalityltr', 'directionalityrtl', 'indent', '|',
+            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+            'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
+            'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+            'print', 'preview', 'searchreplace', 'drafts', 'help'
+        ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
         //    'anchor':'', 'undo':''
@@ -137,7 +82,7 @@
 
         //如果自定义，最好给p标签如下的行高，要不输入中文时，会有跳动感
         //,initialStyle:'p{line-height:1em}'//编辑器层级的基数,可以用来改变字体等
-        
+
         //,iframeCssUrl: URL + '/themes/iframe.css' //给编辑区域的iframe引入一个css文件
 
         //indentValue
@@ -418,69 +363,69 @@
 		,outputXssFilter: true
 		// xss过滤白名单 名单来源: https://raw.githubusercontent.com/leizongmin/js-xss/master/lib/default.js
 		,whitList: {
-			a:      ['target', 'href', 'title'],
-			abbr:   ['title'],
-			address: [],
+			a:      ['target', 'href', 'title', 'class', 'style'],
+			abbr:   ['title', 'class', 'style'],
+			address: ['class', 'style'],
 			area:   ['shape', 'coords', 'href', 'alt'],
 			article: [],
 			aside:  [],
-			audio:  ['autoplay', 'controls', 'loop', 'preload', 'src'],
-			b:      [],
+			audio:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'class', 'style'],
+			b:      ['class', 'style'],
 			bdi:    ['dir'],
 			bdo:    ['dir'],
 			big:    [],
-			blockquote: ['cite'],
+			blockquote: ['cite', 'class', 'style'],
 			br:     [],
-			caption: [],
+			caption: ['class', 'style'],
 			center: [],
 			cite:   [],
-			code:   [],
-			col:    ['align', 'valign', 'span', 'width'],
-			colgroup: ['align', 'valign', 'span', 'width'],
-			dd:     [],
+			code:   ['class', 'style'],
+			col:    ['align', 'valign', 'span', 'width', 'class', 'style'],
+			colgroup: ['align', 'valign', 'span', 'width', 'class', 'style'],
+			dd:     ['class', 'style'],
 			del:    ['datetime'],
 			details: ['open'],
-			div:    [],
-			dl:     [],
-			dt:     [],
-			em:     [],
+			div:    ['class', 'style'],
+			dl:     ['class', 'style'],
+			dt:     ['class', 'style'],
+			em:     ['class', 'style'],
 			font:   ['color', 'size', 'face'],
 			footer: [],
-			h1:     [],
-			h2:     [],
-			h3:     [],
-			h4:     [],
-			h5:     [],
-			h6:     [],
+			h1:     ['class', 'style'],
+			h2:     ['class', 'style'],
+			h3:     ['class', 'style'],
+			h4:     ['class', 'style'],
+			h5:     ['class', 'style'],
+			h6:     ['class', 'style'],
 			header: [],
 			hr:     [],
-			i:      [],
-			img:    ['src', 'alt', 'title', 'width', 'height', 'id', '_src', 'loadingclass'],
+			i:      ['class', 'style'],
+			img:    ['src', 'alt', 'title', 'width', 'height', 'id', '_src', 'loadingclass', 'class'],
 			ins:    ['datetime'],
-			li:     [],
+			li:     ['class', 'style'],
 			mark:   [],
 			nav:    [],
-			ol:     [],
-			p:      [],
-			pre:    [],
+			ol:     ['class', 'style'],
+			p:      ['class', 'style'],
+			pre:    ['class', 'style'],
 			s:      [],
 			section:[],
 			small:  [],
-			span:   [],
-			sub:    [],
-			sup:    [],
-			strong: [],
-			table:  ['width', 'border', 'align', 'valign'],
-			tbody:  ['align', 'valign'],
-			td:     ['width', 'rowspan', 'colspan', 'align', 'valign'],
-			tfoot:  ['align', 'valign'],
-			th:     ['width', 'rowspan', 'colspan', 'align', 'valign'],
-			thead:  ['align', 'valign'],
-			tr:     ['rowspan', 'align', 'valign'],
+			span:   ['class', 'style'],
+			sub:    ['class', 'style'],
+			sup:    ['class', 'style'],
+			strong: ['class', 'style'],
+			table:  ['width', 'border', 'align', 'valign', 'class', 'style'],
+			tbody:  ['align', 'valign', 'class', 'style'],
+			td:     ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
+			tfoot:  ['align', 'valign', 'class', 'style'],
+			th:     ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
+			thead:  ['align', 'valign', 'class', 'style'],
+			tr:     ['rowspan', 'align', 'valign', 'class', 'style'],
 			tt:     [],
 			u:      [],
-			ul:     [],
-			video:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width']
+			ul:     ['class', 'style'],
+			video:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width', 'class', 'style']
 		}
     };
 

@@ -3,6 +3,7 @@ package com.assp.modules.template.mapper;
 import java.util.List;
 
 import com.assp.modules.common.BasicBatchMapper;
+import com.assp.modules.template.entity.Template;
 import com.assp.modules.template.entity.TemplateColumns;
 import com.assp.modules.template.entity.TemplateFooterRelColumns;
 import com.assp.modules.template.entity.TemplateRelColumns;
@@ -77,6 +78,13 @@ public interface TemplateColumnsMapper extends Mapper<TemplateColumns>,BasicBatc
 	 */
 	public List<TemplateColumns> selectTemplateColumnsByTemplateFooterRelColumns(
 			TemplateFooterRelColumns trc);
+	
+	/**返回站脚导航列表
+	 * @param dataColumnId
+	 * @return
+	 */
+	public List<TemplateColumns> selectTemplateColumnsInFooterByTemplateVO(
+			Template template);
 	
 }
   

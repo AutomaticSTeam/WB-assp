@@ -3,6 +3,7 @@ package com.assp.modules.template.service;
 import java.util.List;
 
 import com.assp.common.service.BasicService;
+import com.assp.modules.template.entity.Template;
 import com.assp.modules.template.entity.TemplateColumns;
 
 /**
@@ -74,5 +75,19 @@ public interface ITemplateColumnsService extends BasicService<TemplateColumns>{
 	 * @version
 	 */
 	public int insertList(List<TemplateColumns> list);
+	
+	
+	/**
+	 * 
+	* @Title: selectTemplateColumnsInFooterByTemplateId 
+	* @Description: 根据TemplateFooterId
+	*@author (wzp@sxw100.com)
+	* @param @param templateColumns
+	* @param @return    设定文件 
+	* @throws
+	 */
+	public List<TemplateColumns> selectTemplateColumnsInFooterByTemplateVO(
+			Template template);
+
 }
   

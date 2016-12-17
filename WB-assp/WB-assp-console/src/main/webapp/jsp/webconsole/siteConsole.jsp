@@ -39,7 +39,7 @@ String columnsId= request.getParameter("columnsId");
 	</style>
 	<body class="body">
 		<div id="main">
-			<div class="main-left" style="margin-left: 13%;">
+			<div class="main-left" style="margin-left: 13%;     background-color: #d9dee4; min-height: 700px;">
 				<div class="nav">
 					<ul class="menu-list">
 					<%-- <shiro:hasPermission name="wms:article:manage"> --%>
@@ -165,7 +165,7 @@ String columnsId= request.getParameter("columnsId");
 				</div><!--nav-->
 			</div><!--main-left-->
 			<div class="main-right">
-				<iframe src="<%=rootPath%>/jsp/webconsole/article/articleManage.jsp" frameborder="0" scrolling="auto" style="width:100%;height:100%;" id="baseData"></iframe>
+				<iframe src="<%=rootPath%>/jsp/webconsole/article/articleManage.jsp" frameborder="0" scrolling="auto" style="width:100%;min-height:836px; background-color: #fff;" id="baseData"></iframe>
 			</div>
 		</div><!--main-->
 		

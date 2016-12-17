@@ -53,11 +53,11 @@ document.onkeydown=banBackSpace;
 </head>
 <body  class="bigBg" style="text-align:center;">
 <div class="header" >
-	<h1><a href="#" title="动力威视-WMS管理系统"></a><span>动力威视-WMS管理系统</span></h1>
+	<h1><a href="#" title="易站管理系统"></a><span>易站管理系统</span></h1>
 	<p class="headerUser">
 		您好！<b>管理员</b>
 		<a href="<%= rootPath%>/jsp/common/updatePassWord.jsp" target="mainFrame_center"><span style="color:blue;">[修改密码]</span></a>
-		,欢迎您来到WMS管理系统
+		,欢迎您来到易站管理系统
 		<span id="sysTime"></span>
 		[<a href="javascript:void(0)" title="退出" class="eTxtLink2" onclick="cansolCheck()">退出</a>]</p>
 </div>

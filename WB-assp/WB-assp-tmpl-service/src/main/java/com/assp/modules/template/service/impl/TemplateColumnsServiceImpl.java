@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.assp.modules.template.entity.Template;
 import com.assp.modules.template.entity.TemplateColumns;
 import com.assp.modules.template.mapper.TemplateColumnsMapper;
 import com.assp.modules.template.service.ITemplateColumnsService;
@@ -115,6 +116,13 @@ public class TemplateColumnsServiceImpl implements ITemplateColumnsService {
 	@Override
 	public int insertList(List<TemplateColumns> list) {
 		return templateColumnsMapper.insertList(list);
+	}
+
+	@Override
+	public List<TemplateColumns> selectTemplateColumnsInFooterByTemplateVO(
+			Template template) {
+		// TODO Auto-generated method stub
+		return templateColumnsMapper.selectTemplateColumnsInFooterByTemplateVO(template);
 	}
 
 }

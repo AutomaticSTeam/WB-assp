@@ -16,9 +16,34 @@
 </script>
 <jsp:include page="/jsp/common/commonCssLink.jsp" />
 <jsp:include page="/jsp/common/commonJs.jsp" /> 
-<script type="text/javascript" src="<%=rootPath%>/js/frame/managerFrame.js"></script> 
+<%-- <script type="text/javascript" src="<%=rootPath%>/jsp/frame/js/managerFrames.js"></script>  --%>
+</head>
+<body class="sticky-header">
+  <section>
+    <!-- left side start-->
+      <jsp:include page="/jsp/common/commonLeftSide.jsp" />
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
 
-<div id="managementmoduleTmpls">
+        <!-- header section start-->
+             <jsp:include page="/jsp/common/headerSection.jsp" />
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                                                      管理员
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">控制台</a>
+                </li>
+                <!-- <li class="active"> My Dashboard </li> -->
+            </ul>
+        </div> 
+         <div id="managementmoduleTmpls">
 			<div class="main-content" style="margin: 0 39px 0; margin-top:25px;" >
 				<div class="main-body">
 				 <form action="" method="post" id="moduleTmplForm">
@@ -46,6 +71,13 @@
 				</div><!--main-body-->
 			</div><!--main-content-->
 		</div><!--managementmoduleTmpls-->	
+
+    </div>
+    <!-- main content end-->
+</section>
+
+
+
 </body>
 
 </html>

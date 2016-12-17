@@ -1,0 +1,78 @@
+<div class="listPop">
+	<div class="pop-head pop-tab-title">
+		<a data-tab="01" class="active">常规</a>
+	</div><!--pop-head-->
+	<div class="pop-body">
+		<div class="popTabContent-item popTabContent-01">
+			<div class="pop-form m-a">
+				<div class="popForm-item">
+					<label>模块标题：</label>
+					<div class="label-con">
+						<input class="inputText" type="text" />
+					</div>
+				</div>
+				<div class="popForm-item">
+					<label>模块样式：</label>
+					<div class="label-con">
+						<div class="images-css">
+							<img data-css="1" class="active" src="../../../../../images/list_img01.png" alt="" />
+							<img data-css="2" src="../../../../../images/list_img03.png" alt="" />
+							<img data-css="3" src="../../../../../images/list_img02.png" alt="" />
+						</div>
+					</div>
+				</div>
+				<div class="popForm-item">
+					<label>模块内容：</label>
+					<div class="listClass-box">
+						<div class="listClass-msg">
+							显示的文章为：分类为 <span class="listClass-num"><span class="id_00">“今日关注”</span></span> 的文章
+						</div>
+						<div class="listClass-head">
+							<div class="listClass-head-title">
+								<div class="fl">文章分类：</div>
+								<div class="listClass-radio">
+									<span class="radio"><input type="radio" name="class" id="" />全部</span>
+									<span class="radio"><input type="radio" name="class" id="" />指定</span>
+								</div>
+							</div>
+							<div class="listClass-btn">
+								<a class="btn dib btn-border-gray glClassBtn">管理文章分类</a>
+							</div>
+						</div>
+						<div class="listClass-checkbox">
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							<span class="checkbox"><input type="checkbox" name="" id="" />未分类类 </span>
+							
+						</div>
+					</div><!--listClass-box-->
+				</div>
+			</div>
+		</div><!--popTabContent-->
+	</div><!--pop-body-->
+</div><!--list-pop-->
+
+<script>
+	$(function() {
+			selectCss();
+	});
+	
+	function selectCss () {
+		var imgCss = $('.images-css'),
+			img = imgCss.find('img');
+			
+		img.on('click',function(){
+			var $this = $(this);
+			
+			$this.addClass('active').siblings().removeClass('active');
+		});
+	}
+</script>

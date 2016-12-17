@@ -68,5 +68,16 @@ public interface ITemplateModuleService extends BasicService<TemplateModule> {
 	 */
 	public int addModuleReturnId(TemplateModule module);
 	
+	/**
+	 * 
+	* @Title: addModuleForParentModule 
+	* @Description: 添加模块为主模块
+	* @author (wzp@sxw100.com)
+	* @param @param module
+	* @param @return    设定文件 
+	* @throws
+	 */
+	public void addModuleForParentModule(TemplateModule tempTemplateModule);
+	
 }
   

@@ -1,0 +1,75 @@
+<div class="navPop">
+	<div class="pop-head pop-tab-title hide">
+		<a data-tab="01" class="active">常规</a>
+		<a data-tab="02">信息</a>
+	</div><!--pop-head-->
+	<div class="pop-body">
+		<div class="popTabContent-item popTabContent-01">
+			<a class="btn dib btn-border-red addMenuBtn">添加菜单</a>	
+			<div class="popInfo-box">
+				<div class="popInfo-head">
+					<div class="popInfo-name">
+						菜单名称
+					</div>
+					<div class="popInfo-type">
+						菜单类型
+					</div>
+					<div class="popInfo-show">
+						菜单可见
+					</div>
+					<div class="popInfo-operation">
+						操作
+					</div>
+				</div>
+				<div class="popInfo-body">
+					<div class="popInfo-item">
+						<div class="popInfo-name">
+							网站首页
+							<div class="popInfo-move">
+								<a href="javascript:;" class="move-item move-top"></a>
+								<a href="javascript:;" class="move-item move-bottom"></a>
+								<a href="javascript:;" class="move-item move-left"></a>
+								<a href="javascript:;" class="move-item move-right"></a>
+							</div>
+						</div>
+						<div class="popInfo-type">
+							系统菜单（首页）
+						</div>
+						<div class="popInfo-show">
+							<a class="hide"></a>
+						</div>
+						<div class="popInfo-operation">
+							<a class="editor editorNavBtn">【编辑】</a>
+							<a class="delete">【删除】</a>
+						</div>
+						<div class="popInfo-add">
+							<a class="addMenuBtnNew"></a>
+						</div>
+					</div>
+				</div>
+				<div class="popInfo-num">共26个</div>
+			</div><!--popInfo-box-->
+		</div>
+		<div class="popTabContent-item popTabContent-02 hide">
+			编辑器
+		</div>
+	</div><!--pop-body-->
+</div><!--nav-body-->
+
+<script>
+	$(function() {
+		tab01();
+	});
+	
+	function tab01 () {
+		var tabItem = $('.pop-tab-title a');
+			
+		tabItem.on('click',function(){
+			var $this = $(this);
+			var val = $this.attr('data-tab');
+			
+			$this.addClass('active').siblings().removeClass('active');
+			$('.popTabContent-'+val).removeClass('hide').siblings().addClass('hide');
+		});
+	}
+</script>

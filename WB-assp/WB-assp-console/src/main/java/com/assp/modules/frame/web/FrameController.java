@@ -113,12 +113,6 @@ public class FrameController extends BaseController{
 			HttpSession session,
 			Frames frames)  {
 		logger.debug("--进入ManagerFrame方法--");
-		try {
-			frames.setFramesName(new String(frames.getFramesName().getBytes("iso-8859-1"),"UTF-8"));
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		List<Frames> FramesList = framesService.queryByExample(frames);
 		for(Frames framesOne : FramesList){
 			if(framesOne.getFramesAttachmentImg() != null){
