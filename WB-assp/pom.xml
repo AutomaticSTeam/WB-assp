@@ -7,25 +7,25 @@
   <packaging>pom</packaging>
   
   <properties>
-	<!-- 主要框架版本设置  main version setting -->
-		<!-- spring版本�?-->
+	<!-- ä¸»è¦æ¡†æž¶ç‰ˆæœ¬è®¾ç½®  main version setting -->
+		<!-- springç‰ˆæœ¬ï¿?-->
 		<spring.version>4.0.2.RELEASE</spring.version>
-		<!-- mybatis版本�?-->
+		<!-- mybatisç‰ˆæœ¬ï¿?-->
 		<mybatis.version>3.2.6</mybatis.version>
-		<!-- log4j日志文件管理包版�?-->
+		<!-- log4jæ—¥å¿—æ–‡ä»¶ç®¡ç†åŒ…ç‰ˆï¿?-->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
-		<!-- shrio安全管理框架版本�?-->
+		<!-- shrioå®‰å…¨ç®¡ç†æ¡†æž¶ç‰ˆæœ¬ï¿?-->
 		<ehcache.version>2.6.9</ehcache.version>
 		<ehcache-web.version>2.0.4</ehcache-web.version>
 		<shiro.version>1.2.3</shiro.version>
-		<!-- druid数据源版本号 -->
+		<!-- druidæ•°æ®æºç‰ˆæœ¬å· -->
 		<druid.version>1.0.11</druid.version>
-		<!-- aspectJ和cglib版本�?-->
+		<!-- aspectJå’Œcglibç‰ˆæœ¬ï¿?-->
 		<aspectj.version>1.8.2</aspectj.version>
 		<cglib.version>3.1</cglib.version>
 	
-	   <!-- 常用工具类版本设�?tools version setting -->
+	   <!-- å¸¸ç”¨å·¥å…·ç±»ç‰ˆæœ¬è®¾ï¿?tools version setting -->
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<commons-io.version>2.4</commons-io.version>
 		<commons-codec.version>1.9</commons-codec.version>
@@ -35,7 +35,7 @@
 		<pagehelper.version>3.6.1</pagehelper.version>
 		<mapper.version>3.0.0</mapper.version>
 
-		<!-- 构建路径 -->
+		<!-- æž„å»ºè·¯å¾„ -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.lib.systemPath>${basedir}/src/main/webapp/WEB-INF/lib/</project.build.lib.systemPath>     
 	</properties>
@@ -45,11 +45,11 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<!-- 表示�?��的时候引入，发布的时候不会加载此�?-->
+			<!-- è¡¨ç¤ºï¿?ï¿½ï¿½çš„æ—¶å€™å¼•å…¥ï¼Œå‘å¸ƒçš„æ—¶å€™ä¸ä¼šåŠ è½½æ­¤ï¿?-->
 			<!-- <scope>test</scope> -->
 		</dependency>
 		
-			<!-- spring核心�?-->
+			<!-- springæ ¸å¿ƒï¿?-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -101,7 +101,7 @@
 			<version>${spring.version}</version>
 		</dependency>
 		
-		<!-- 该包是spring集成AspectJ LTW织入器所�?���?-->
+		<!-- è¯¥åŒ…æ˜¯springé›†æˆAspectJ LTWç»‡å…¥å™¨æ‰€ï¿?ï¿½ï¿½ï¿?-->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
@@ -118,50 +118,50 @@
 			<version>${cglib.version}</version>
 		</dependency>
 		
-			<!-- mybatis核心�?-->
+			<!-- mybatisæ ¸å¿ƒï¿?-->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>${mybatis.version}</version>
 		</dependency>
-		<!-- mybatis/spring�?-->
+		<!-- mybatis/springï¿?-->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		<!-- 导入java ee jar �?-->
+		<!-- å¯¼å…¥java ee jar ï¿?-->
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
 		</dependency>
 		
-		<!-- 阿里巴巴数据�?druid 配置 connection pool -->
+		<!-- é˜¿é‡Œå·´å·´æ•°æ®ï¿?druid é…ç½® connection pool -->
 		<dependency>
 		     <groupId>com.alibaba</groupId>
 		     <artifactId>druid</artifactId>
 		     <version>${druid.version}</version>
 		</dependency>
-		<!-- 导入Mysql数据库链接jar�?-->
+		<!-- å¯¼å…¥Mysqlæ•°æ®åº“é“¾æŽ¥jarï¿?-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.30</version>
+			<version>8.0.16</version>
 		</dependency>
-		<!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
+		<!-- å¯¼å…¥dbcpçš„jaråŒ…ï¼Œç”¨æ¥åœ¨applicationContext.xmlä¸­é…ç½®æ•°æ®åº“ -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		<!-- JSTL标签�?-->
+		<!-- JSTLæ ‡ç­¾ï¿?-->
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- 日志文件管理�?-->
+		<!-- æ—¥å¿—æ–‡ä»¶ç®¡ç†ï¿?-->
 		<!-- log start -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -169,7 +169,7 @@
 			<version>${log4j.version}</version>
 		</dependency>
 		
-		<!-- 格式化对象，方便输出日志 -->
+		<!-- æ ¼å¼åŒ–å¯¹è±¡ï¼Œæ–¹ä¾¿è¾“å‡ºæ—¥å¿— -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
@@ -189,7 +189,7 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		<!-- log end -->
-		<!-- 映入JSON -->
+		<!-- æ˜ å…¥JSON -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
@@ -203,7 +203,7 @@
 			<version>${guava.version}</version>
 		</dependency>
 
-		<!-- 常用工具�?GENERAL UTILS begin -->
+		<!-- å¸¸ç”¨å·¥å…·ï¿?GENERAL UTILS begin -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -235,9 +235,9 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- 常用工具�?GENERAL UTILS end -->
+		<!-- å¸¸ç”¨å·¥å…·ï¿?GENERAL UTILS end -->
 		
-		<!-- 权限管理框架 shiro SECURITY begin -->
+		<!-- æƒé™ç®¡ç†æ¡†æž¶ shiro SECURITY begin -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
@@ -269,7 +269,7 @@
 			<artifactId>shiro-ehcache</artifactId>
 			<version>${shiro.version}</version>
 		</dependency>
-		<!-- 权限管理框架 shiro SECURITY end -->
+		<!-- æƒé™ç®¡ç†æ¡†æž¶ shiro SECURITY end -->
 		
 		<!--spring redis as share session-->
         <dependency>
@@ -279,13 +279,13 @@
         </dependency>
 		
 		
-		<!-- 分页插件 -->
+		<!-- åˆ†é¡µæ’ä»¶ -->
 		<dependency>
 		    <groupId>com.github.pagehelper</groupId>
 		    <artifactId>pagehelper</artifactId>
 		    <version>${pagehelper.version}</version>
 		</dependency>
-		<!-- 通用Mapper -->
+		<!-- é€šç”¨Mapper -->
 		<dependency>
 	      <groupId>com.github.abel533</groupId>
 	      <artifactId>mapper</artifactId>
@@ -302,7 +302,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-	    <!-- 解析文件 -->
+	    <!-- è§£æžæ–‡ä»¶ -->
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -318,14 +318,14 @@
 			<artifactId>jaxb-api</artifactId>
 			<version>2.2.12</version>
 		</dependency>
-		<!-- 发�?验证�?-->
+		<!-- å‘ï¿½?éªŒè¯ï¿?-->
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
 		
-		<!-- 发�?验证�?-->
+		<!-- å‘ï¿½?éªŒè¯ï¿?-->
 		
 		
 		<dependency>
@@ -348,13 +348,13 @@
 				<artifactId>jedis</artifactId>
 				<version>2.6.0</version>
 			</dependency>
-			<!-- SFTP 相关的JAR�?-->
+			<!-- SFTP ç›¸å…³çš„JARï¿?-->
 			<dependency>
 				<groupId>com.jcraft</groupId>
 				<artifactId>jsch</artifactId>
 				<version>0.1.52</version>
 			</dependency>
-			<!-- axis调用webservice接口 -->
+			<!-- axisè°ƒç”¨webserviceæŽ¥å£ -->
 			<dependency>
 				<groupId>org.apache.axis</groupId>
 				<artifactId>axis</artifactId>
@@ -376,13 +376,13 @@
 				<version>1.5.1</version>
 			</dependency>
 			
-			<!-- 第三方jar -->
+			<!-- ç¬¬ä¸‰æ–¹jar -->
 			<dependency>
 				<groupId>org.json</groupId>
 				<artifactId>json</artifactId>
 				<version>20140107</version>
 			</dependency>
-			<!-- POI导出excel类库 -->
+			<!-- POIå¯¼å‡ºexcelç±»åº“ -->
 			<dependency>
 			    <groupId>org.apache.poi</groupId>
 			    <artifactId>poi</artifactId>
