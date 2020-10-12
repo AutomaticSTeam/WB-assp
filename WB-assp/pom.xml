@@ -44,7 +44,7 @@
    	    <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.13.1</version>
 			<!-- è¡¨ç¤ºï¿?ï¿½ï¿½çš„æ—¶å€™å¼•å…¥ï¼Œå‘å¸ƒçš„æ—¶å€™ä¸ä¼šåŠ è½½æ­¤ï¿?-->
 			<!-- <scope>test</scope> -->
 		</dependency>
