@@ -9,7 +9,7 @@
   <properties>
 	<!-- ä¸»è¦æ¡†æž¶ç‰ˆæœ¬è®¾ç½®  main version setting -->
 		<!-- springç‰ˆæœ¬ï¿?-->
-		<spring.version>4.0.2.RELEASE</spring.version>
+		<spring.version>5.2.22.RELEASE</spring.version>
 		<!-- mybatisç‰ˆæœ¬ï¿?-->
 		<mybatis.version>3.2.6</mybatis.version>
 		<!-- log4jæ—¥å¿—æ–‡ä»¶ç®¡ç†åŒ…ç‰ˆï¿?-->
